@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_screen.dart';
+import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_view_model.dart';
 import 'package:spp_pay/ui/screens/login_screen.dart/login_screen.dart';
 import 'package:spp_pay/ui/screens/login_screen.dart/login_view_model.dart';
 import 'package:spp_pay/ui/screens/splash_screen/splash_screen.dart';
@@ -12,6 +13,9 @@ void main() {
       providers: [
         ChangeNotifierProvider<LoginViewModel>(
           create: (_) => LoginViewModel(),
+        ),
+        ChangeNotifierProvider<DashboardViewModel>(
+          create: (_) => DashboardViewModel(),
         ),
       ],
       child: const MyApp(),
@@ -43,8 +47,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const SplashScreen(),
-        '/login-screen': (context) => const LoginScreen(),
-        '/dashboard-screen': (context) => const DashboardScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
       },
     );
   }

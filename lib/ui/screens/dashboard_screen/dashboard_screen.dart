@@ -1,22 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
+import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_view_model.dart';
 import 'package:spp_pay/ui/widgets/dashboard_tagihan_item.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<DashboardViewModel>(context, listen: false)
+        .getUserInfo(context);
+    Provider.of<DashboardViewModel>(context, listen: false)
+        .getPembayaran(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardViewModel>(context);
+
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-        children: [
-          buildProfile(),
-          buildCard(),
-          buildTagihan(),
-        ],
-      ),
+      body: dashboardProvider.isLoading
+          ? Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+                color: greenColor,
+                size: 50,
+              ),
+            )
+          : ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+              children: [
+                buildProfile(context),
+                buildCard(context),
+                buildTagihan(context),
+              ],
+            ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         elevation: 0,
@@ -64,7 +90,8 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget buildProfile() {
+  Widget buildProfile(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardViewModel>(context);
     return Container(
       margin: const EdgeInsets.only(top: 40),
       child: Row(
@@ -83,7 +110,7 @@ class DashboardScreen extends StatelessWidget {
               SizedBox(
                 width: 230,
                 child: Text(
-                  'Rizki Andika Setiadi',
+                  '${dashboardProvider.user?.namaSiswa}',
                   style: blackTextStyle.copyWith(
                     fontSize: 20,
                     fontWeight: semiBold,
@@ -114,7 +141,9 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCard() {
+  Widget buildCard(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardViewModel>(context);
+
     return Container(
       margin: const EdgeInsets.only(top: 30),
       padding: const EdgeInsets.all(28),
@@ -133,16 +162,15 @@ class DashboardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Rizki Andika Setiadi',
+            '${dashboardProvider.user?.namaSiswa}',
             style: whiteTextStyle.copyWith(
-              fontSize: 18,
-              fontWeight: medium,
-              overflow: TextOverflow.ellipsis
-            ),
+                fontSize: 18,
+                fontWeight: medium,
+                overflow: TextOverflow.ellipsis),
           ),
           const SizedBox(height: 28),
           Text(
-            '11120029',
+            '${dashboardProvider.user?.noIndukSiswa}',
             style: whiteTextStyle.copyWith(
               fontSize: 18,
               fontWeight: medium,
@@ -162,7 +190,7 @@ class DashboardScreen extends StatelessWidget {
           SizedBox(
             width: 150,
             child: Text(
-              '10',
+              '${dashboardProvider.pembayaran?.length}',
               style: whiteTextStyle.copyWith(
                 fontSize: 24,
                 fontWeight: semiBold,
@@ -175,7 +203,9 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget buildTagihan() {
+  Widget buildTagihan(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardViewModel>(context);
+
     return Container(
       margin: const EdgeInsets.only(top: 30),
       child: Column(
@@ -191,24 +221,20 @@ class DashboardScreen extends StatelessWidget {
           // const SizedBox(height: 15),
           ListView.builder(
             padding: const EdgeInsets.only(top: 15),
-            itemCount: 4,
+            itemCount: dashboardProvider.pembayaran?.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {},
-                child: index % 2 == 0
-                    ? DashboardTagihanItem(
-                        bulan: 'Januari',
-                        price: formatCurrency(100000),
-                        isVerified: false,
-                      )
-                    : DashboardTagihanItem(
-                        bulan: 'Maret',
-                        price: formatCurrency(525000),
-                        isVerified: true,
-                      ),
-              );
+              var pembayaran = dashboardProvider.pembayaran?[index];
+              return pembayaran?.status != false
+                  ? Container()
+                  : DashboardTagihanItem(
+                      onTap: () {},
+                      bulan: '${pembayaran?.spp?.bulan}',
+                      price: formatCurrency(
+                          int.parse(pembayaran?.jumlahBayar ?? "")),
+                      isVerified: pembayaran?.status,
+                    );
             },
           )
         ],

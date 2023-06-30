@@ -44,29 +44,36 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: Column(
               children: [
-                const CustomFormField(
+                CustomFormField(
                   title: 'No Induk Siswa',
+                  hintText: 'Masukkan Nomor Induk Siswa',
+                  controller: loginProvider.nisController,
                 ),
                 const SizedBox(height: 16),
                 CustomFormField(
                   title: 'Password',
-                  obscureText: true,
+                  hintText: 'Masukkan Password',
+                  controller: loginProvider.passwordController,
+                  obscureText: loginProvider.isHidePassword,
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      loginProvider.showHidePassword();
+                    },
                     icon: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: Image.asset(
-                        'assets/ic_eye_lock.png',
-                      ),
-                    ),
+                        width: 20,
+                        height: 20,
+                        child: Image.asset(
+                          loginProvider.isHidePassword
+                              ? 'assets/ic_eye_lock.png'
+                              : 'assets/ic_eye.png',
+                        )),
                   ),
                 ),
                 const SizedBox(height: 60),
                 CustomFilledButton(
                   title: 'Masuk',
                   onPressed: () {
-                    loginProvider.navigateToDashboard(context);
+                    loginProvider.loginProvider(context);
                   },
                 ),
               ],

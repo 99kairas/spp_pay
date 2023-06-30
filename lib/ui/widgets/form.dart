@@ -7,6 +7,8 @@ class CustomFormField extends StatelessWidget {
   final TextEditingController? controller;
   final bool isShowTitle;
   final Widget? suffixIcon;
+  final String? hintText;
+  final Function(String)? onChanged;
 
   const CustomFormField({
     super.key,
@@ -15,6 +17,8 @@ class CustomFormField extends StatelessWidget {
     this.controller,
     this.isShowTitle = true,
     this.suffixIcon,
+    this.hintText,
+    this.onChanged,
   });
 
   @override
@@ -36,10 +40,15 @@ class CustomFormField extends StatelessWidget {
           controller: controller,
           obscuringCharacter: '*',
           decoration: InputDecoration(
+            // errorText: errorMessage,
             suffixIcon: suffixIcon,
-            hintText: isShowTitle ? null : title,
+            hintText: hintText,
+            hintStyle: greyTextStyle.copyWith(
+              fontSize: 14,
+              fontWeight: regular,
+            ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
             ),
             contentPadding: const EdgeInsets.all(12),
           ),
