@@ -19,6 +19,9 @@ class DashboardViewModel with ChangeNotifier {
   List<Pembayaran>? _pembayaran;
   List<Pembayaran>? get pembayaran => _pembayaran;
 
+  String? _image;
+  get image => _image;
+
   void getUserInfo(BuildContext context) async {
     _isLoading = true;
     await Future.delayed(const Duration(seconds: 2));

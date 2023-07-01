@@ -9,21 +9,26 @@ class DetailPaymentViewModel with ChangeNotifier {
   String _jumlahBayar = '';
   String get jumlahBayar => _jumlahBayar;
 
-  List<DetailPayment> _listPayment = [];
-  List<DetailPayment> get listPayment => _listPayment;
+  DetailPayment? _listPayment;
+  DetailPayment? get listPayment => _listPayment;
+
+  String? _image;
+  String? get image => _image;
 
   void getDetailPayment({String? idPembayaran}) async {
-    _isLoading = true;
-    await Future.delayed(const Duration(seconds: 1));
+    try {
+      _isLoading = true;
+      await Future.delayed(const Duration(seconds: 1));
 
-    final detailResult = await DetailPaymentService()
-        .getDetailPayment(idPembayaran: idPembayaran);
+      final detailResult = await DetailPaymentService()
+          .getDetailPayment(idPembayaran: idPembayaran);
 
-    _listPayment = detailResult.data;
+      _listPayment = detailResult.data;
 
-    _isLoading = false;
-    notifyListeners();
-
-    print('HELLO 5 ${detailResult.data}');
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
   }
 }

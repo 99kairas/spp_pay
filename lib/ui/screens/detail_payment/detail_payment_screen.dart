@@ -9,9 +9,11 @@ import 'package:spp_pay/ui/widgets/buttons.dart';
 
 class DetailPaymentScreen extends StatefulWidget {
   final String? idPembayaran;
+  final String? image;
   const DetailPaymentScreen({
     super.key,
     this.idPembayaran,
+    this.image,
   });
 
   @override
@@ -29,7 +31,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
   @override
   Widget build(BuildContext context) {
     final detailPaymentProvider = Provider.of<DetailPaymentViewModel>(context);
-    var payment = detailPaymentProvider.listPayment.first;
+    var payment = detailPaymentProvider.listPayment;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rincian Pembayaran'),
@@ -72,7 +74,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                     children: [
                       Center(
                         child: Text(
-                          payment.spp.tahun,
+                          payment?.spp.tahun ?? "",
                           style: blackTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: medium,
@@ -81,7 +83,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 34),
                       Text(
-                        payment.siswa.namaSiswa,
+                        '${payment?.siswa.namaSiswa}',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -90,7 +92,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        payment.siswa.kelas,
+                        '${payment?.siswa.kelas}',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -99,7 +101,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        payment.noIndukSiswa,
+                        payment?.noIndukSiswa ?? "",
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -109,7 +111,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       const SizedBox(height: 28),
                       Center(
                         child: Text(
-                          'Tagihan : ',
+                          'No Pembayaran Tagihan : ${payment?.idPembayaran ?? ""} ',
                           style: blackTextStyle.copyWith(
                             fontSize: 15,
                             fontWeight: medium,
@@ -121,7 +123,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Bulan\n${payment.spp.bulan}',
+                            'Bulan\n${payment?.spp.bulan}',
                             style: blackTextStyle.copyWith(
                               fontSize: 14,
                               letterSpacing: 1,
@@ -130,7 +132,8 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            formatCurrency(int.parse(payment.jumlahBayar)),
+                            formatCurrency(
+                                int.parse(payment?.jumlahBayar ?? "")),
                             style: greyTextStyle.copyWith(
                               fontSize: 14,
                               fontWeight: medium,
@@ -149,10 +152,9 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MetodePembayaranScreen(
-                            idPembayaran: payment.idPembayaran.toString(),
+                            idPembayaran: payment?.idPembayaran.toString(),
                           ),
                         ));
-                    print('HELLO ID PEMBAYARAN ${payment.idPembayaran}');
                   },
                 ),
                 const SizedBox(height: 30),

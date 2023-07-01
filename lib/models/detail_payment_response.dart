@@ -12,7 +12,7 @@ String detailPaymentResponseToJson(DetailPaymentResponse data) =>
 
 class DetailPaymentResponse {
   String message;
-  List<DetailPayment> data;
+  DetailPayment data;
 
   DetailPaymentResponse({
     required this.message,
@@ -22,13 +22,12 @@ class DetailPaymentResponse {
   factory DetailPaymentResponse.fromJson(Map<String, dynamic> json) =>
       DetailPaymentResponse(
         message: json["message"],
-        data: List<DetailPayment>.from(
-            json["data"].map((x) => DetailPayment.fromJson(x))),
+        data: DetailPayment.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": data.toJson(),
       };
 }
 

@@ -12,6 +12,7 @@ import 'package:spp_pay/shared/theme.dart';
 //     duration: const Duration(seconds: 2),
 //   ).show(context);
 // }
+
 class Utility {
   static final rupiah =
       NumberFormat.currency(locale: 'id', symbol: 'Rp. ', decimalDigits: 0);
@@ -84,6 +85,7 @@ class SharedPref {
 
 class APIConstant {
   static String baseUrl = 'http://10.0.2.2:5000/api';
+  static String imageUrl = 'http://10.0.2.2:5000';
   static Map<String, String> auth(String token) => {
         "authorization": "$token",
       };

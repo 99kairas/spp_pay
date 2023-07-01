@@ -122,7 +122,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/login', (route) => false);
+              SharedPref.removeToken();
+            },
             child: Container(
               width: 60,
               height: 60,

@@ -20,7 +20,7 @@ class MetodePembayaranText extends StatelessWidget {
             letterSpacing: 1,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
       ],
     );
   }
