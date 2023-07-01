@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_view_model.dart';
+import 'package:spp_pay/ui/screens/detail_payment/detail_payment_screen.dart';
 import 'package:spp_pay/ui/widgets/dashboard_tagihan_item.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -229,7 +230,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
               return pembayaran?.status != false
                   ? Container()
                   : DashboardTagihanItem(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPaymentScreen(
+                                idPembayaran:
+                                    pembayaran?.idPembayaran.toString(),
+                              ),
+                            ));
+                      },
                       bulan: '${pembayaran?.spp?.bulan}',
                       price: formatCurrency(
                           int.parse(pembayaran?.jumlahBayar ?? "")),
