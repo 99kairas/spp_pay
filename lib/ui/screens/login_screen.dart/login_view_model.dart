@@ -126,4 +126,9 @@ class LoginViewModel with ChangeNotifier {
     nisController.clear();
     passwordController.clear();
   }
+
+  void navigateToAdminLoginScreen(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/admin-login', (route) => false);
+  }
 }

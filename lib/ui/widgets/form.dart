@@ -40,7 +40,6 @@ class CustomFormField extends StatelessWidget {
           controller: controller,
           obscuringCharacter: '*',
           decoration: InputDecoration(
-            // errorText: errorMessage,
             suffixIcon: suffixIcon,
             hintText: hintText,
             hintStyle: greyTextStyle.copyWith(

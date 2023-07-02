@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spp_pay/shared/theme.dart';
-import 'package:spp_pay/ui/screens/login_screen.dart/login_view_model.dart';
+import 'package:spp_pay/ui/screens/admin_login_screen/admin_login_view_model.dart';
 import 'package:spp_pay/ui/widgets/buttons.dart';
 import 'package:spp_pay/ui/widgets/form.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class AdminLoginScreen extends StatefulWidget {
+  const AdminLoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<AdminLoginScreen> createState() => _AdminLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _AdminLoginScreenState extends State<AdminLoginScreen> {
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginViewModel>(context);
+    final adminProvider = Provider.of<AdminLoginViewModel>(context);
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 76, horizontal: 24),
@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 46),
           Text(
-            'Selamat Datang,\nSilahkan Login',
+            'Selamat Datang,\nAdmin Teladan',
             style: blackTextStyle.copyWith(
               fontSize: 20,
               fontWeight: semiBold,
@@ -45,35 +45,36 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 CustomFormField(
-                  title: 'No Induk Siswa',
-                  hintText: 'Masukkan Nomor Induk Siswa',
-                  controller: loginProvider.nisController,
+                  title: 'Username',
+                  hintText: 'Masukkan Username',
+                  controller: adminProvider.nisController,
                 ),
                 const SizedBox(height: 16),
                 CustomFormField(
                   title: 'Password',
                   hintText: 'Masukkan Password',
-                  controller: loginProvider.passwordController,
-                  obscureText: loginProvider.isHidePassword,
+                  controller: adminProvider.passwordController,
+                  obscureText: adminProvider.isHidePassword,
                   suffixIcon: IconButton(
                     onPressed: () {
-                      loginProvider.showHidePassword();
+                      adminProvider.showHidePassword();
                     },
                     icon: SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: Image.asset(
-                          loginProvider.isHidePassword
-                              ? 'assets/ic_eye_lock.png'
-                              : 'assets/ic_eye.png',
-                        )),
+                      width: 20,
+                      height: 20,
+                      child: Image.asset(
+                        adminProvider.isHidePassword
+                            ? 'assets/ic_eye_lock.png'
+                            : 'assets/ic_eye.png',
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 60),
                 CustomFilledButton(
                   title: 'Masuk',
                   onPressed: () {
-                    loginProvider.loginProvider(context);
+                    adminProvider.loginProvider(context);
                   },
                 ),
               ],
@@ -82,9 +83,9 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(height: 68),
           Center(
             child: CustomTextButton(
-              title: 'Admin Klik Disini',
+              title: 'User Klik Disini',
               onPressed: () {
-                loginProvider.navigateToAdminLoginScreen(context);
+                adminProvider.navigateToUserLogin(context);
               },
             ),
           ),
