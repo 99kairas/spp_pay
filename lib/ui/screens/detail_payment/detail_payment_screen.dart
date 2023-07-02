@@ -74,7 +74,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                     children: [
                       Center(
                         child: Text(
-                          payment?.spp.tahun ?? "",
+                          payment?.spp?.tahun ?? "",
                           style: blackTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: medium,
@@ -83,7 +83,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 34),
                       Text(
-                        '${payment?.siswa.namaSiswa}',
+                        '${payment?.siswa?.namaSiswa}',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -92,7 +92,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '${payment?.siswa.kelas}',
+                        '${payment?.siswa?.kelas}',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -111,7 +111,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       const SizedBox(height: 28),
                       Center(
                         child: Text(
-                          'No Pembayaran Tagihan : ${payment?.idPembayaran ?? ""} ',
+                          'No Tagihan : ${payment?.idPembayaran ?? ""} ',
                           style: blackTextStyle.copyWith(
                             fontSize: 15,
                             fontWeight: medium,
@@ -123,7 +123,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Bulan\n${payment?.spp.bulan}',
+                            'Bulan\n${payment?.spp?.bulan}',
                             style: blackTextStyle.copyWith(
                               fontSize: 14,
                               letterSpacing: 1,
@@ -133,7 +133,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                           ),
                           Text(
                             formatCurrency(
-                                int.parse(payment?.jumlahBayar ?? "")),
+                                int.parse(payment?.spp?.jumlah ?? "")),
                             style: greyTextStyle.copyWith(
                               fontSize: 14,
                               fontWeight: medium,

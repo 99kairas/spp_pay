@@ -18,6 +18,8 @@ class DetailPaymentService {
         ),
       );
 
+      print(response.data);
+
       return DetailPaymentResponse.fromJson(response.data);
     } on DioException catch (e) {
       throw Exception('Failed to Get Data $e');

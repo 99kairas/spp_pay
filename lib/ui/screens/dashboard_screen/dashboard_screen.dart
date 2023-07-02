@@ -5,6 +5,9 @@ import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_view_model.dart';
 import 'package:spp_pay/ui/screens/detail_payment/detail_payment_screen.dart';
+import 'package:spp_pay/ui/screens/riwayat_pembayaran/riwayat_pembayaran_screen.dart';
+import 'package:spp_pay/ui/screens/settings/setting_screen.dart';
+import 'package:spp_pay/ui/widgets/bottom_navigation_bar_item.dart';
 import 'package:spp_pay/ui/widgets/dashboard_tagihan_item.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -24,12 +27,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
         .getPembayaran(context);
   }
 
-  @override
-  Widget build(BuildContext context) {
+  int _selectedIndex = 0;
+
+  void _changeSelectedNavBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget screenBottomNavigation(int index) {
     final dashboardProvider = Provider.of<DashboardViewModel>(context);
 
-    return Scaffold(
-      body: dashboardProvider.isLoading
+    if (index == 0) {
+      return dashboardProvider.isLoading
           ? Center(
               child: LoadingAnimationWidget.fourRotatingDots(
                 color: greenColor,
@@ -43,15 +53,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 buildCard(context),
                 buildTagihan(context),
               ],
-            ),
+            );
+    } else if (index == 1) {
+      return const RiwayatPembayaranScreen();
+    } else if (index == 2) {
+      return const SettingScreen();
+    } else {
+      return const Center(child: Text('Index belum terpasang'));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: screenBottomNavigation(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         backgroundColor: whiteColor,
         selectedItemColor: greenColor,
-        unselectedItemColor: darkBackgroundColor,
-        showSelectedLabels: true,
+        unselectedItemColor: greyColor,
+        currentIndex: _selectedIndex,
         showUnselectedLabels: true,
+        onTap: _changeSelectedNavBar,
         selectedLabelStyle: greenTextStyle.copyWith(
           fontSize: 13,
           fontWeight: medium,
@@ -61,30 +85,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
           fontWeight: medium,
         ),
         items: [
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/ic_dashboard.png',
-              width: 20,
-              height: 20,
-              color: greenColor,
-            ),
+          bottomNavBarWidget(
+            image: 'assets/ic_dashboard.png',
             label: 'Dashboard',
+            color: _selectedIndex != 0 ? greyColor : greenColor,
           ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/ic_riwayat.png',
-              width: 20,
-              height: 20,
-            ),
+          bottomNavBarWidget(
+            image: 'assets/ic_riwayat.png',
             label: 'Riwayat',
+            color: _selectedIndex != 1 ? greyColor : greenColor,
           ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/ic_settings.png',
-              width: 20,
-              height: 20,
-            ),
+          bottomNavBarWidget(
+            image: 'assets/ic_settings.png',
             label: 'Pengaturan',
+            color: _selectedIndex != 2 ? greyColor : greenColor,
           ),
         ],
       ),
@@ -246,7 +260,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       },
                       bulan: '${pembayaran?.spp?.bulan}',
                       price: formatCurrency(
-                          int.parse(pembayaran?.jumlahBayar ?? "")),
+                          int.parse(pembayaran?.spp?.jumlah ?? "")),
                       isVerified: pembayaran?.status,
                     );
             },

@@ -28,7 +28,7 @@ class DetailPaymentViewModel with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     } catch (e) {
-      print(e);
+      throw Exception(e.toString());
     }
   }
 }

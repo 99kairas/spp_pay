@@ -4,145 +4,142 @@
 
 import 'dart:convert';
 
-DetailPaymentResponse detailPaymentResponseFromJson(String str) =>
-    DetailPaymentResponse.fromJson(json.decode(str));
+DetailPaymentResponse detailPaymentResponseFromJson(String str) => DetailPaymentResponse.fromJson(json.decode(str));
 
-String detailPaymentResponseToJson(DetailPaymentResponse data) =>
-    json.encode(data.toJson());
+String detailPaymentResponseToJson(DetailPaymentResponse data) => json.encode(data.toJson());
 
 class DetailPaymentResponse {
-  String message;
-  DetailPayment data;
+    final String? message;
+    final DetailPayment? data;
 
-  DetailPaymentResponse({
-    required this.message,
-    required this.data,
-  });
+    DetailPaymentResponse({
+        this.message,
+        this.data,
+    });
 
-  factory DetailPaymentResponse.fromJson(Map<String, dynamic> json) =>
-      DetailPaymentResponse(
+    factory DetailPaymentResponse.fromJson(Map<String, dynamic> json) => DetailPaymentResponse(
         message: json["message"],
-        data: DetailPayment.fromJson(json["data"]),
-      );
+        data: json["data"] == null ? null : DetailPayment.fromJson(json["data"]),
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "message": message,
-        "data": data.toJson(),
-      };
+        "data": data?.toJson(),
+    };
 }
 
 class DetailPayment {
-  int idPembayaran;
-  int idSpp;
-  String noIndukSiswa;
-  dynamic tanggalBayar;
-  String jumlahBayar;
-  bool status;
-  List<Image> images;
-  Siswa siswa;
-  Spp spp;
+    final int? idPembayaran;
+    final int? idSpp;
+    final String? noIndukSiswa;
+    final dynamic tanggalBayar;
+    final String? jumlahBayar;
+    final bool? status;
+    final Image? image;
+    final Siswa? siswa;
+    final Spp? spp;
 
-  DetailPayment({
-    required this.idPembayaran,
-    required this.idSpp,
-    required this.noIndukSiswa,
-    this.tanggalBayar,
-    required this.jumlahBayar,
-    required this.status,
-    required this.images,
-    required this.siswa,
-    required this.spp,
-  });
+    DetailPayment({
+        this.idPembayaran,
+        this.idSpp,
+        this.noIndukSiswa,
+        this.tanggalBayar,
+        this.jumlahBayar,
+        this.status,
+        this.image,
+        this.siswa,
+        this.spp,
+    });
 
-  factory DetailPayment.fromJson(Map<String, dynamic> json) => DetailPayment(
+    factory DetailPayment.fromJson(Map<String, dynamic> json) => DetailPayment(
         idPembayaran: json["idPembayaran"],
         idSpp: json["idSpp"],
         noIndukSiswa: json["noIndukSiswa"],
         tanggalBayar: json["tanggalBayar"],
         jumlahBayar: json["jumlahBayar"],
         status: json["status"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-        siswa: Siswa.fromJson(json["siswa"]),
-        spp: Spp.fromJson(json["spp"]),
-      );
+        image: json["image"] == null ? null : Image.fromJson(json["image"]),
+        siswa: json["siswa"] == null ? null : Siswa.fromJson(json["siswa"]),
+        spp: json["spp"] == null ? null : Spp.fromJson(json["spp"]),
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "idPembayaran": idPembayaran,
         "idSpp": idSpp,
         "noIndukSiswa": noIndukSiswa,
         "tanggalBayar": tanggalBayar,
         "jumlahBayar": jumlahBayar,
         "status": status,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "siswa": siswa.toJson(),
-        "spp": spp.toJson(),
-      };
+        "image": image?.toJson(),
+        "siswa": siswa?.toJson(),
+        "spp": spp?.toJson(),
+    };
 }
 
 class Image {
-  String file;
-  DateTime createdAt;
+    final String? file;
+    final DateTime? createdAt;
 
-  Image({
-    required this.file,
-    required this.createdAt,
-  });
+    Image({
+        this.file,
+        this.createdAt,
+    });
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+    factory Image.fromJson(Map<String, dynamic> json) => Image(
         file: json["file"],
-        createdAt: DateTime.parse(json["createdAt"]),
-      );
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "file": file,
-        "createdAt": createdAt.toIso8601String(),
-      };
+        "createdAt": createdAt?.toIso8601String(),
+    };
 }
 
 class Siswa {
-  String namaSiswa;
-  String kelas;
-  String alamat;
+    final String? namaSiswa;
+    final String? kelas;
+    final String? alamat;
 
-  Siswa({
-    required this.namaSiswa,
-    required this.kelas,
-    required this.alamat,
-  });
+    Siswa({
+        this.namaSiswa,
+        this.kelas,
+        this.alamat,
+    });
 
-  factory Siswa.fromJson(Map<String, dynamic> json) => Siswa(
+    factory Siswa.fromJson(Map<String, dynamic> json) => Siswa(
         namaSiswa: json["namaSiswa"],
         kelas: json["kelas"],
         alamat: json["alamat"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "namaSiswa": namaSiswa,
         "kelas": kelas,
         "alamat": alamat,
-      };
+    };
 }
 
 class Spp {
-  String tahun;
-  String bulan;
-  String jumlah;
+    final String? tahun;
+    final String? bulan;
+    final String? jumlah;
 
-  Spp({
-    required this.tahun,
-    required this.bulan,
-    required this.jumlah,
-  });
+    Spp({
+        this.tahun,
+        this.bulan,
+        this.jumlah,
+    });
 
-  factory Spp.fromJson(Map<String, dynamic> json) => Spp(
+    factory Spp.fromJson(Map<String, dynamic> json) => Spp(
         tahun: json["tahun"],
         bulan: json["bulan"],
         jumlah: json["jumlah"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "tahun": tahun,
         "bulan": bulan,
         "jumlah": jumlah,
-      };
+    };
 }

@@ -24,15 +24,13 @@ class DashboardViewModel with ChangeNotifier {
 
   void getUserInfo(BuildContext context) async {
     _isLoading = true;
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     final result = await DashboardService().getUserInfo();
     try {
       if (result.data != null) {
         _user = result.data;
       }
-
-      print('HELLO 2 ${user?.namaSiswa}');
     } on DioException catch (e) {
       scaffoldMessengerFailed(
           context: context, title: e.response?.data['message']);
@@ -41,7 +39,7 @@ class DashboardViewModel with ChangeNotifier {
 
   void getPembayaran(BuildContext context) async {
     _isLoading = true;
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final result = await DashboardService().getPembayaran();
 
     try {
@@ -49,7 +47,6 @@ class DashboardViewModel with ChangeNotifier {
         _pembayaran = result.data;
       }
       _isLoading = false;
-      print('HELLO 3 ${_pembayaran?.length}');
       notifyListeners();
       // return _pembayaran;
     } on DioException catch (e) {

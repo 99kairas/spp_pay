@@ -7,6 +7,7 @@ import 'package:spp_pay/ui/screens/detail_payment/detail_payment_view_model.dart
 import 'package:spp_pay/ui/screens/login_screen.dart/login_screen.dart';
 import 'package:spp_pay/ui/screens/login_screen.dart/login_view_model.dart';
 import 'package:spp_pay/ui/screens/metode_pembayaran/metode_pembayaran_view_model.dart';
+import 'package:spp_pay/ui/screens/riwayat_pembayaran/riwayat_pembayaran_view_model.dart';
 import 'package:spp_pay/ui/screens/splash_screen/splash_screen.dart';
 
 void main() {
@@ -24,6 +25,9 @@ void main() {
         ),
         ChangeNotifierProvider<MetodePembayaranViewModel>(
           create: (_) => MetodePembayaranViewModel(),
+        ),
+        ChangeNotifierProvider<RiwayatPembayaranViewModel>(
+          create: (_) => RiwayatPembayaranViewModel(),
         ),
       ],
       child: const MyApp(),

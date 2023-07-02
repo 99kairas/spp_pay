@@ -196,7 +196,7 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
                   width: 1,
                 ),
               ),
-              child: paymentMethodProvider.image == null
+              child: paymentMethodProvider.image == ''
                   ? InkWell(
                       onTap: () {
                         paymentMethodProvider.uploadImage(
@@ -217,8 +217,9 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           const MetodePembayaranText(
-              title:
-                  'Note : Bukti pembayaran akan terhapus secara otomatis jika bukti tidak valid\napabila terhapus maka wali murid diwajibkan untuk mengupload ulang'),
+            title:
+                'Note : Bukti pembayaran akan terhapus secara otomatis jika bukti tidak valid\napabila terhapus maka wali murid diwajibkan untuk mengupload ulang',
+          ),
         ],
       ),
     );

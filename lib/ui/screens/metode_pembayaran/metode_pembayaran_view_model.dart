@@ -26,7 +26,8 @@ class MetodePembayaranViewModel with ChangeNotifier {
         color: greenColor,
         result: result,
       );
-      await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 1));
+
     } else {
       // ignore: use_build_context_synchronously
       scaffoldMessenger(
@@ -48,13 +49,17 @@ class MetodePembayaranViewModel with ChangeNotifier {
       final detailResult = await DetailPaymentService()
           .getDetailPayment(idPembayaran: idPembayaran);
 
-      _image =
-          '${APIConstant.imageUrl}/img/${detailResult.data.images[0].file}';
+      if (detailResult.data?.image != null) {
+        _image =
+            '${APIConstant.imageUrl}/img/${detailResult.data?.image?.file}';
+      } else {
+        _image = '';
+      }
 
       _isLoading = false;
       notifyListeners();
     } catch (e) {
-      throw Exception(e);
+      throw Exception(e.toString());
     }
   }
 
