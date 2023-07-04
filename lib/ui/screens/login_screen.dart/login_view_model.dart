@@ -116,7 +116,6 @@ class LoginViewModel with ChangeNotifier {
     } on DioException catch (e) {
       scaffoldMessengerFailed(
           context: context, title: '${e.response?.data['message']}');
-      print(e.response?.data);
     }
   }
 

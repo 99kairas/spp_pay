@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/screens/admin_dashboard/admin_dashboard_screen.dart';
-import 'package:spp_pay/ui/screens/admin_login_screen/admin_login_screen.dart';
+import 'package:spp_pay/ui/screens/admin_dashboard/admin_dashboard_view_model.dart';
 import 'package:spp_pay/ui/screens/admin_login_screen/admin_login_view_model.dart';
 import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_screen.dart';
 import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_view_model.dart';
@@ -34,6 +34,9 @@ void main() {
         ),
         ChangeNotifierProvider<AdminLoginViewModel>(
           create: (_) => AdminLoginViewModel(),
+        ),
+        ChangeNotifierProvider<AdminDashboardViewModel>(
+          create: (_) => AdminDashboardViewModel(),
         ),
       ],
       child: const MyApp(),
@@ -67,7 +70,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/dashboard': (context) => const DashboardScreen(),
-        '/admin-login': (context) => const AdminLoginScreen(),
         '/admin-dashboard': (context) => const AdminDashboardScreen(),
       },
     );

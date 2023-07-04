@@ -32,7 +32,6 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
   Widget build(BuildContext context) {
     final detailPaymentProvider = Provider.of<DetailPaymentViewModel>(context);
     var payment = detailPaymentProvider.listPayment;
-    print(payment?.idPembayaran);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rincian Pembayaran'),
@@ -159,7 +158,6 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                             idPembayaran: payment?.idPembayaran.toString(),
                           ),
                         ));
-                        print('ID PEMBAYARAN ${widget.idPembayaran}');
                   },
                 ),
                 const SizedBox(height: 30),

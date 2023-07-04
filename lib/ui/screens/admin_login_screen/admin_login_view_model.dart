@@ -52,19 +52,18 @@ class AdminLoginViewModel with ChangeNotifier {
     } on DioException catch (e) {
       scaffoldMessengerFailed(
           context: context, title: '${e.response?.data['message']}');
-      print(e.response?.data);
     }
   }
 
   void navigateToDashboardScreen(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/admin-dashboard', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/admin-dashboard', (route) => false);
 
     nisController.clear();
     passwordController.clear();
   }
 
   void navigateToUserLogin(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(
-        context, '/login', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
 }

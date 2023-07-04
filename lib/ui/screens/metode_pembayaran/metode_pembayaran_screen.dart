@@ -157,7 +157,6 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
     final paymentMethodProvider =
         Provider.of<MetodePembayaranViewModel>(context);
 
-    print('IMAGES ${paymentMethodProvider.image}');
     return Container(
       margin: const EdgeInsets.only(top: 40),
       child: Column(

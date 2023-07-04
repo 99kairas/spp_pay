@@ -40,7 +40,6 @@ class MetodePembayaranService {
           return true;
         }
       } else {
-        print('Result is null');
         return false;
       }
       return true;
