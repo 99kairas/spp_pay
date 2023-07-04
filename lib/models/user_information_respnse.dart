@@ -4,72 +4,70 @@
 
 import 'dart:convert';
 
-UserInformationResponse userInformationResponseFromJson(String str) =>
-    UserInformationResponse.fromJson(json.decode(str));
+UserInformationResponse userInformationResponseFromJson(String str) => UserInformationResponse.fromJson(json.decode(str));
 
-String userInformationResponseToJson(UserInformationResponse data) =>
-    json.encode(data.toJson());
+String userInformationResponseToJson(UserInformationResponse data) => json.encode(data.toJson());
 
 class UserInformationResponse {
-  final String? message;
-  final UserInformation? data;
+    String message;
+    UserInformation data;
 
-  UserInformationResponse({
-    this.message,
-    this.data,
-  });
+    UserInformationResponse({
+        required this.message,
+        required this.data,
+    });
 
-  factory UserInformationResponse.fromJson(Map<String, dynamic> json) =>
-      UserInformationResponse(
+    factory UserInformationResponse.fromJson(Map<String, dynamic> json) => UserInformationResponse(
         message: json["message"],
-        data: json["data"] == null
-            ? null
-            : UserInformation.fromJson(json["data"]),
-      );
+        data: UserInformation.fromJson(json["data"]),
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "message": message,
-        "data": data?.toJson(),
-      };
+        "data": data.toJson(),
+    };
 }
 
 class UserInformation {
-  final String? noIndukSiswa;
-  final String? namaSiswa;
-  final String? kelas;
-  final String? alamat;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+    String noIndukSiswa;
+    String namaSiswa;
+    String password;
+    String kelas;
+    String alamat;
+    String fotoProfil;
+    DateTime createdAt;
+    DateTime updatedAt;
 
-  UserInformation({
-    this.noIndukSiswa,
-    this.namaSiswa,
-    this.kelas,
-    this.alamat,
-    this.createdAt,
-    this.updatedAt,
-  });
+    UserInformation({
+        required this.noIndukSiswa,
+        required this.namaSiswa,
+        required this.password,
+        required this.kelas,
+        required this.alamat,
+        required this.fotoProfil,
+        required this.createdAt,
+        required this.updatedAt,
+    });
 
-  factory UserInformation.fromJson(Map<String, dynamic> json) =>
-      UserInformation(
-        noIndukSiswa: json["noIndukSiswa"],
-        namaSiswa: json["namaSiswa"],
+    factory UserInformation.fromJson(Map<String, dynamic> json) => UserInformation(
+        noIndukSiswa: json["no_induk_siswa"],
+        namaSiswa: json["nama_siswa"],
+        password: json["password"],
         kelas: json["kelas"],
         alamat: json["alamat"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-      );
+        fotoProfil: json["foto_profil"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+    );
 
-  Map<String, dynamic> toJson() => {
-        "noIndukSiswa": noIndukSiswa,
-        "namaSiswa": namaSiswa,
+    Map<String, dynamic> toJson() => {
+        "no_induk_siswa": noIndukSiswa,
+        "nama_siswa": namaSiswa,
+        "password": password,
         "kelas": kelas,
         "alamat": alamat,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-      };
+        "foto_profil": fotoProfil,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+    };
 }

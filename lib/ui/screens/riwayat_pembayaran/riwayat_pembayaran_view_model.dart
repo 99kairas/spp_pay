@@ -19,7 +19,7 @@ class RiwayatPembayaranViewModel with ChangeNotifier {
     final result = await RiwayatPembayaranService().getPembayaran();
 
     try {
-      if (result.data != null) {
+      if (result.data.isNotEmpty) {
         _pembayaran = result.data;
       }
 

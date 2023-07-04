@@ -250,13 +250,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             MaterialPageRoute(
                               builder: (context) => DetailPaymentScreen(
                                 idPembayaran:
-                                    pembayaran?.idPembayaran.toString(),
+                                    pembayaran?.idPembayaran,
                               ),
                             ));
                       },
-                      bulan: '${pembayaran?.spp?.bulan}',
+                      bulan: '${pembayaran?.spp.bulan}',
                       price: formatCurrency(
-                          int.parse(pembayaran?.spp?.jumlah ?? "")),
+                          int.parse(pembayaran?.spp.jumlah ?? "")),
                       isVerified: pembayaran?.status,
                     );
             },

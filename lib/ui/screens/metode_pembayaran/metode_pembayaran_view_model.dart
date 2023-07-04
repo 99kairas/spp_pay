@@ -49,9 +49,9 @@ class MetodePembayaranViewModel with ChangeNotifier {
       final detailResult = await DetailPaymentService()
           .getDetailPayment(idPembayaran: idPembayaran);
 
-      if (detailResult.data?.image != null) {
+      if (detailResult.data.fotoPembayaran.isNotEmpty) {
         _image =
-            '${APIConstant.imageUrl}/img/${detailResult.data?.image?.file}';
+            '${APIConstant.imageUrl}/img/${detailResult.data.fotoPembayaran}';
       } else {
         _image = '';
       }

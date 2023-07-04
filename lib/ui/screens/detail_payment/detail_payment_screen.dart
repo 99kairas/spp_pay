@@ -32,6 +32,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
   Widget build(BuildContext context) {
     final detailPaymentProvider = Provider.of<DetailPaymentViewModel>(context);
     var payment = detailPaymentProvider.listPayment;
+    print(payment?.idPembayaran);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rincian Pembayaran'),
@@ -74,7 +75,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                     children: [
                       Center(
                         child: Text(
-                          payment?.spp?.tahun ?? "",
+                          payment?.spp.tahun ?? "",
                           style: blackTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: medium,
@@ -83,7 +84,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 34),
                       Text(
-                        '${payment?.siswa?.namaSiswa}',
+                        '${payment?.siswa.namaSiswa}',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -92,7 +93,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '${payment?.siswa?.kelas}',
+                        '${payment?.siswa.kelas}',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: regular,
@@ -110,11 +111,14 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 28),
                       Center(
-                        child: Text(
-                          'No Tagihan : ${payment?.idPembayaran ?? ""} ',
-                          style: blackTextStyle.copyWith(
-                            fontSize: 15,
-                            fontWeight: medium,
+                        child: Flexible(
+                          child: Text(
+                            'No Tagihan : ${payment?.idPembayaran}',
+                            style: blackTextStyle.copyWith(
+                              fontSize: 15,
+                              fontWeight: medium,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       ),
@@ -123,7 +127,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Bulan\n${payment?.spp?.bulan}',
+                            'Bulan\n${payment?.spp.bulan}',
                             style: blackTextStyle.copyWith(
                               fontSize: 14,
                               letterSpacing: 1,
@@ -133,7 +137,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                           ),
                           Text(
                             formatCurrency(
-                                int.parse(payment?.spp?.jumlah ?? "")),
+                                int.parse(payment?.spp.jumlah ?? "")),
                             style: greyTextStyle.copyWith(
                               fontSize: 14,
                               fontWeight: medium,
@@ -144,7 +148,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.375),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.325),
                 CustomFilledButton(
                   title: 'Bayar',
                   onPressed: () {
@@ -155,6 +159,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                             idPembayaran: payment?.idPembayaran.toString(),
                           ),
                         ));
+                        print('ID PEMBAYARAN ${widget.idPembayaran}');
                   },
                 ),
                 const SizedBox(height: 30),

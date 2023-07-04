@@ -43,9 +43,9 @@ class _RiwayatPembayaranScreenState extends State<RiwayatPembayaranScreen> {
                 var riwayatSuccess = riwayatProvider.pembayaran?[index];
                 return riwayatSuccess?.status == true
                     ? RiwayatPembayaranItem(
-                        bulan: '${riwayatSuccess?.spp?.bulan}',
+                        bulan: '${riwayatSuccess?.spp.bulan}',
                         price: formatCurrency(
-                          int.parse('${riwayatSuccess?.spp?.jumlah}'),
+                          int.parse('${riwayatSuccess?.spp.jumlah}'),
                         ),
                         onTap: () {},
                         isVerified: riwayatSuccess?.status,

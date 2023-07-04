@@ -10,7 +10,7 @@ class DetailPaymentService {
 
     try {
       final response = await dio.get(
-        '${APIConstant.baseUrl}/pembayaran/details?idPembayaran=$idPembayaran',
+        '${APIConstant.baseUrl}/pembayaran/details?id_pembayaran=$idPembayaran',
         options: Options(
           headers: {
             "authorization": '$token',

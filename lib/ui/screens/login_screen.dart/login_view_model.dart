@@ -101,12 +101,12 @@ class LoginViewModel with ChangeNotifier {
       final response = await dio.post(
         '${APIConstant.baseUrl}/auth/login',
         data: {
-          "noIndukSiswa": nisController.text,
+          "no_induk_siswa": nisController.text,
           "password": passwordController.text,
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        saveToken(response.data['data']['accessToken']);
+        saveToken(response.data['accessToken']);
         scaffoldMessengerSuccess(
           context: context,
           title: response.data['message'],

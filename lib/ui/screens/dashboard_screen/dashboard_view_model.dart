@@ -28,7 +28,7 @@ class DashboardViewModel with ChangeNotifier {
 
     final result = await DashboardService().getUserInfo();
     try {
-      if (result.data != null) {
+      if (result.data != '') {
         _user = result.data;
       }
     } on DioException catch (e) {
@@ -43,7 +43,7 @@ class DashboardViewModel with ChangeNotifier {
     final result = await DashboardService().getPembayaran();
 
     try {
-      if (result.data != null) {
+      if (result.data.isNotEmpty) {
         _pembayaran = result.data;
       }
       _isLoading = false;

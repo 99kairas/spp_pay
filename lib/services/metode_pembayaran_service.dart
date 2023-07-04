@@ -25,9 +25,9 @@ class MetodePembayaranService {
 
         var form = FormData();
 
-        form.files.add(MapEntry("fotoPembayaran", mFile));
+        form.files.add(MapEntry("foto_pembayaran", mFile));
 
-        final response = await dio.post(
+        final response = await dio.put(
           '${APIConstant.baseUrl}/pembayaran/$idPembayaran/upload',
           data: form,
           options: Options(

@@ -37,12 +37,12 @@ class AdminLoginViewModel with ChangeNotifier {
       final response = await dio.post(
         '${APIConstant.baseUrl}/auth/login/admin',
         data: {
-          "noIndukSiswa": nisController.text,
+          "username": nisController.text,
           "password": passwordController.text,
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        saveToken(response.data['data']['accessToken']);
+        saveToken(response.data['accessToken']);
         scaffoldMessengerSuccess(
           context: context,
           title: response.data['message'],
