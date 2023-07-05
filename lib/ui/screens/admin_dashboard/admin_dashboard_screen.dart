@@ -70,6 +70,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   _onItemTapped(0);
                   Navigator.pop(context);
                 },
+                isSelect: _selectedIndex == 0,
               ),
               AdminDashboardDrawerItem(
                 title: 'Lihat Semua Pembayaran',
@@ -77,6 +78,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   _onItemTapped(1);
                   Navigator.pop(context);
                 },
+                isSelect: _selectedIndex == 1,
               ),
               AdminDashboardDrawerItem(
                 title: 'Tambah SPP',
@@ -84,6 +86,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   _onItemTapped(2);
                   Navigator.pop(context);
                 },
+                isSelect: _selectedIndex == 2,
               ),
               AdminDashboardDrawerItem(
                 title: 'Lihat Semua SPP',
@@ -91,6 +94,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   _onItemTapped(3);
                   Navigator.pop(context);
                 },
+                isSelect: _selectedIndex == 3,
               ),
             ],
           ),
