@@ -6,6 +6,7 @@ import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/screens/admin_dashboard/admin_dashboard_view_model.dart';
 import 'package:spp_pay/ui/widgets/buttons.dart';
+import 'package:spp_pay/ui/widgets/form.dart';
 
 class AdminTambahPembayaran extends StatefulWidget {
   const AdminTambahPembayaran({super.key});
@@ -296,8 +297,28 @@ class _AdminTambahPembayaranDetailsState
   }
 
   Widget buildSiswa(BuildContext context) {
+    final adminTambahPembayaran = Provider.of<AdminDashboardViewModel>(context);
     return Container(
-      child: Text('Satu Siswa'),
+      margin: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          CustomFormField(
+            title: 'No Induk Siswa',
+            controller: adminTambahPembayaran.pembayaranSiswaController,
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.55),
+          CustomFilledButton(
+            title: 'Tambah Pembayaran',
+            onPressed: () {
+              adminTambahPembayaran.addPembayaranByNIS(
+                context,
+                widget.idSpp,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

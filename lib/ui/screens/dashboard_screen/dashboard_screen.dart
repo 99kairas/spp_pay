@@ -249,8 +249,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailPaymentScreen(
-                                idPembayaran:
-                                    pembayaran?.idPembayaran,
+                                idPembayaran: pembayaran?.idPembayaran,
                               ),
                             ));
                       },

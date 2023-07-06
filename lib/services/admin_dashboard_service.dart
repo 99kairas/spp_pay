@@ -89,4 +89,31 @@ class AdminDashboardService {
       return false;
     }
   }
+
+  Future<bool> pembayaranByNIS({
+    String? idSpp,
+    String? noIndukSiswa,
+  }) async {
+    final token = await SharedPref.getToken();
+
+    try {
+      final response = await dio.post(
+        '${APIConstant.baseUrl}/admin/pembayaran/create?no_induk_siswa=$noIndukSiswa&id_spp=$idSpp',
+        data: {
+          'foto_pembayaran': "",
+          'jumlah_bayar': 0,
+          'tanggal_bayar': '${DateTime.now()}',
+          'status': 0,
+        },
+        options: Options(
+          headers: APIConstant.auth('$token'),
+        ),
+      );
+      print('service ${response.data}');
+      return true;
+    } on DioException catch (e) {
+      print('error service ${e.response?.data}');
+      return false;
+    }
+  }
 }

@@ -114,4 +114,37 @@ class AdminDashboardViewModel with ChangeNotifier {
       print(e);
     }
   }
+
+  // PROPERTY OF PEMBAYARAN SISWA BY NIS
+  TextEditingController pembayaranSiswaController =
+      TextEditingController(text: '');
+
+  void addPembayaranByNIS(
+    BuildContext context,
+    String? idSpp,
+  ) async {
+    try {
+      final result = await AdminDashboardService().pembayaranByNIS(
+        idSpp: idSpp,
+        noIndukSiswa: pembayaranSiswaController.text,
+      );
+      if (result == true) {
+        scaffoldMessenger(
+          context: context,
+          title:
+              'berhasil menambahkan pembayaran ke ${pembayaranSiswaController.text}',
+          color: greenColor,
+          result: result,
+        );
+      } else {
+        scaffoldMessenger(
+          context: context,
+          title: 'gagal menambahkan pembayaran ke semua siswa',
+          color: redColor,
+          result: result,
+        );
+      }
+      notifyListeners();
+    } catch (e) {}
+  }
 }
