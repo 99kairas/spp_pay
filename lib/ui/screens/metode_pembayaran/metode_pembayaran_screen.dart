@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/screens/metode_pembayaran/metode_pembayaran_view_model.dart';
 import 'package:spp_pay/ui/widgets/metode_pembayaran_text.dart';
@@ -8,10 +9,12 @@ import 'package:spp_pay/ui/widgets/metode_pembayaran_text.dart';
 class MetodePembayaranScreen extends StatefulWidget {
   final String? idPembayaran;
   final String? image;
+  final String? total;
   const MetodePembayaranScreen({
     super.key,
     this.idPembayaran,
     this.image,
+    this.total,
   });
 
   @override
@@ -163,6 +166,15 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
+            'Total Pembayaran  ${formatCurrency(int.parse(widget.total ?? ""))}',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          const SizedBox(height: 20),
+          Text(
             'Tata Cara\nPembayaran Transfer',
             style: blackTextStyle.copyWith(
               fontSize: 16,
@@ -173,52 +185,53 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
           const MetodePembayaranText(
               title:
                   '1. Sebelum melakukan pembayaran menggunakan Transfer, pastikan jumlah yang dimasukkan sesuai'),
+          const SizedBox(height: 10),
           const MetodePembayaranText(
               title: '2. Transfer ke salah satu nomor rekening di bawah ini :'),
           const MetodePembayaranText(
-              title: ' - BCA, 	5410425652 a.n SDI Teladan Suci'),
+              title: ' - BCA\n5410425652 a.n SDI Teladan Suci'),
           const MetodePembayaranText(
-              title: ' - BRI, 	6455-01-002538-53-3 a.n Yayasan Teladan Suci'),
+              title: ' - BRI\n6455-01-002538-53-3 a.n Yayasan Teladan Suci'),
+          const SizedBox(height: 10),
           const MetodePembayaranText(
               title:
                   '3. Setelah melakukan pembayaran, screenshot bukti pembayaran tersebut lalu kirimkan melalui menu dibawah :'),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           Center(
             child: Container(
-              width: 127,
-              height: 120,
-              decoration: BoxDecoration(
-                color: lightBackgroundColor,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: greyColor,
-                  width: 1,
+                width: 127,
+                height: 120,
+                decoration: BoxDecoration(
+                  color: lightBackgroundColor,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: greyColor,
+                    width: 1,
+                  ),
                 ),
-              ),
-              child: paymentMethodProvider.image == ''
-                  ? InkWell(
-                      onTap: () {
-                        paymentMethodProvider.uploadImage(
-                          context: context,
-                          idPembayaran: widget.idPembayaran,
-                        );
-                      },
-                      child: Center(
-                        child: Image.asset(
-                          'assets/ic_upload.png',
-                          width: 32,
-                          height: 32,
-                        ),
-                      ),
-                    )
-                  : Image.network(paymentMethodProvider.image ?? ""),
-            ),
+                child: InkWell(
+                  onTap: () {
+                    paymentMethodProvider.uploadImage(
+                      context: context,
+                      idPembayaran: widget.idPembayaran,
+                    );
+                  },
+                  child: Center(
+                      child: paymentMethodProvider.image == ''
+                          ? Image.asset(
+                              'assets/ic_upload.png',
+                              width: 32,
+                              height: 32,
+                            )
+                          : Image.network(paymentMethodProvider.image ?? "")),
+                )),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           const MetodePembayaranText(
             title:
-                'Note : Bukti pembayaran akan terhapus secara otomatis jika bukti tidak valid\napabila terhapus maka wali murid diwajibkan untuk mengupload ulang',
+                'Note : Bukti pembayaran akan terhapus secara otomatis jika bukti tidak valid apabila terhapus maka wali murid diwajibkan untuk mengupload ulang',
           ),
+          const SizedBox(height: 30),
         ],
       ),
     );

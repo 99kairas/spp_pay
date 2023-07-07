@@ -4,15 +4,17 @@ import 'package:spp_pay/shared/theme.dart';
 class RiwayatPembayaranItem extends StatelessWidget {
   final String bulan;
   final String price;
-  final bool? isVerified;
+  final String? tagihan;
+  final int? isVerified;
   final Function()? onTap;
 
   const RiwayatPembayaranItem({
     super.key,
     required this.bulan,
     required this.price,
-    this.isVerified = false,
+    this.isVerified = 0,
     this.onTap,
+    this.tagihan,
   });
 
   @override
@@ -53,7 +55,7 @@ class RiwayatPembayaranItem extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            isVerified == true
+            isVerified == 1
                 ? Row(
                     children: [
                       Icon(

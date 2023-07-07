@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:spp_pay/services/detail_payment_service.dart';
 import 'package:spp_pay/services/metode_pembayaran_service.dart';
@@ -19,17 +21,15 @@ class MetodePembayaranViewModel with ChangeNotifier {
     final result =
         await MetodePembayaranService().uploadImage(idPembayaran: idPembayaran);
     if (result == true) {
-      // ignore: use_build_context_synchronously
       scaffoldMessenger(
         context: context,
         title: 'Berhasil Upload Image',
         color: greenColor,
         result: result,
       );
-          await Future.delayed(const Duration(seconds: 1));
-
+      Navigator.pop(context);
+      // await Future.delayed(const Duration(seconds: 1));
     } else {
-      // ignore: use_build_context_synchronously
       scaffoldMessenger(
         context: context,
         title: 'Gagal Upload Image',

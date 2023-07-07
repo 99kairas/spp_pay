@@ -46,13 +46,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 size: 50,
               ),
             )
-          : ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-              children: [
-                buildProfile(context),
-                buildCard(context),
-                buildTagihan(context),
-              ],
+          : RefreshIndicator(
+              onRefresh: () async {
+                dashboardProvider.isLoading
+                    ? Center(
+                        child: LoadingAnimationWidget.fourRotatingDots(
+                          color: greenColor,
+                          size: 50,
+                        ),
+                      )
+                    : dashboardProvider.getPembayaran(context);
+              },
+              child: ListView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+                children: [
+                  buildProfile(context),
+                  buildCard(context),
+                  buildTagihan(context),
+                ],
+              ),
             );
     } else if (index == 1) {
       return const RiwayatPembayaranScreen();
@@ -183,7 +196,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 fontWeight: medium,
                 overflow: TextOverflow.ellipsis),
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 10),
           Text(
             '${dashboardProvider.user?.noIndukSiswa}',
             style: whiteTextStyle.copyWith(
@@ -192,20 +205,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
               letterSpacing: 4,
             ),
           ),
-          const SizedBox(height: 21),
+          const SizedBox(height: 30),
           Text(
-            'Total Pembayaran : ',
+            'Total Tagihan : ',
             style: whiteTextStyle.copyWith(
-              fontSize: 14,
-              fontWeight: regular,
+              fontSize: 16,
+              fontWeight: semiBold,
             ),
-            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 2),
           SizedBox(
-            width: 150,
+            width: 100,
             child: Text(
-              '${dashboardProvider.pembayaran?.length}',
+              '${dashboardProvider.getTotalTagihan}',
               style: whiteTextStyle.copyWith(
                 fontSize: 24,
                 fontWeight: semiBold,
@@ -241,9 +253,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               var pembayaran = dashboardProvider.pembayaran?[index];
-              return pembayaran?.status != false
-                  ? Container()
-                  : DashboardTagihanItem(
+
+              return pembayaran?.status == 0 || pembayaran?.status == 2
+                  ? DashboardTagihanItem(
                       onTap: () {
                         Navigator.push(
                             context,
@@ -257,7 +269,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       price: formatCurrency(
                           int.parse(pembayaran?.spp.jumlah ?? "")),
                       isVerified: pembayaran?.status,
-                    );
+                    )
+                  : Container();
             },
           )
         ],

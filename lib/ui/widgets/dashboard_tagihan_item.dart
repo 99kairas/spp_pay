@@ -4,14 +4,14 @@ import 'package:spp_pay/shared/theme.dart';
 class DashboardTagihanItem extends StatelessWidget {
   final String bulan;
   final String price;
-  final bool? isVerified;
+  final int? isVerified;
   final Function()? onTap;
 
   const DashboardTagihanItem({
     super.key,
     required this.bulan,
     required this.price,
-     this.isVerified = false,
+    this.isVerified = 0,
     this.onTap,
   });
 
@@ -53,43 +53,64 @@ class DashboardTagihanItem extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            isVerified == true
-                ? Row(
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        size: 14,
-                        color: greenColor,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        'Lunas',
-                        style: greenTextStyle.copyWith(
-                          fontWeight: medium,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      SizedBox(
-                        width: 14,
-                        child: Image.asset(
-                          'assets/ic_uncheck.png',
-                          color: redColor,
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        'Belum Lunas',
-                        style: redTextStyle.copyWith(
-                          fontWeight: medium,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ],
+            if (isVerified == 1)
+              Row(
+                children: [
+                  Icon(
+                    Icons.check_circle,
+                    size: 14,
+                    color: greenColor,
                   ),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Lunas',
+                    style: greenTextStyle.copyWith(
+                      fontWeight: medium,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            if (isVerified == 0)
+              Row(
+                children: [
+                  SizedBox(
+                    width: 14,
+                    child: Image.asset(
+                      'assets/ic_uncheck.png',
+                      color: redColor,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Belum Lunas',
+                    style: redTextStyle.copyWith(
+                      fontWeight: medium,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
+            if (isVerified == 2)
+              Row(
+                children: [
+                  SizedBox(
+                    width: 14,
+                    child: Image.asset(
+                      'assets/ic_ditinjau.png',
+                      color: yellowColor,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Sedang Ditinjau',
+                    style: yellowTextStyle.copyWith(
+                      fontWeight: medium,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

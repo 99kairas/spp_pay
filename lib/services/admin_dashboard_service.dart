@@ -1,10 +1,29 @@
 import 'package:dio/dio.dart';
 import 'package:spp_pay/models/admin_all_pembayaran_response.dart';
 import 'package:spp_pay/models/admin_all_spp_response.dart';
+import 'package:spp_pay/models/detail_payment_response.dart';
 import 'package:spp_pay/shared/shared_methods.dart';
 
 class AdminDashboardService {
   Dio dio = Dio();
+
+  Future<DetailPaymentResponse> getUserInfo({String? idPembayaran}) async {
+    final token = await SharedPref.getToken();
+    try {
+      final response = await dio.get(
+        '${APIConstant.baseUrl}/admin/pembayaran/show?id_pembayaran=$idPembayaran',
+        options: Options(
+          headers: {
+            "authorization": '$token',
+          },
+        ),
+      );
+      return DetailPaymentResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      return DetailPaymentResponse.fromJson(e.response?.data);
+    }
+  }
+
   Future<AdminAllPembayaranResponse> getAllPembayaran() async {
     final token = await SharedPref.getToken();
 

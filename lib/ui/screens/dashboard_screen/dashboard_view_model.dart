@@ -19,6 +19,9 @@ class DashboardViewModel with ChangeNotifier {
   List<Pembayaran>? _pembayaran;
   List<Pembayaran>? get pembayaran => _pembayaran;
 
+  int? _getTotalTagihan;
+  int? get getTotalTagihan => _getTotalTagihan;
+
   String? _image;
   get image => _image;
 
@@ -45,7 +48,12 @@ class DashboardViewModel with ChangeNotifier {
     try {
       if (result.data.isNotEmpty) {
         _pembayaran = result.data;
+        final filter = _pembayaran!
+            .where((element) => element.status == 0 || element.status == 2)
+            .toList();
+        _getTotalTagihan = filter.length;
       }
+
       _isLoading = false;
       notifyListeners();
       // return _pembayaran;

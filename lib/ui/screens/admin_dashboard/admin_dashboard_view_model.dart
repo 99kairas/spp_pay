@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:spp_pay/models/admin_all_pembayaran_response.dart';
 import 'package:spp_pay/models/admin_all_spp_response.dart';
+import 'package:spp_pay/models/detail_payment_response.dart';
 import 'package:spp_pay/services/admin_dashboard_service.dart';
+import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
 import 'package:spp_pay/ui/widgets/scaffold_messenger.dart';
 
@@ -11,11 +13,40 @@ class AdminDashboardViewModel with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  DetailPayment? _user;
+  DetailPayment? get user => _user;
+
   List<AllPembayaran>? _allPembayaran;
   List<AllPembayaran>? get allPembayaran => _allPembayaran;
 
   List<AllSpp>? _allSpp;
   List<AllSpp>? get allSpp => _allSpp;
+
+  String? _image;
+  String? get image => _image;
+
+  void getUserInfo(BuildContext context, String? idPembayaran) async {
+    _isLoading = true;
+    await Future.delayed(const Duration(seconds: 1));
+
+    final result =
+        await AdminDashboardService().getUserInfo(idPembayaran: idPembayaran);
+    try {
+      if (result.data != '') {
+        _user = result.data;
+        if (result.data.fotoPembayaran.isNotEmpty) {
+          _image = '${APIConstant.imageUrl}/img/${result.data.fotoPembayaran}';
+        } else {
+          _image = '';
+        }
+      }
+      print(result.data.fotoPembayaran);
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
   void getAllPembayaran() async {
     _isLoading = true;

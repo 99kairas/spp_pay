@@ -35,7 +35,7 @@ class AllPembayaran {
     dynamic tanggalBayar;
     String? jumlahBayar;
     String? fotoPembayaran;
-    bool? status;
+    int? status;
     Siswa? siswa;
     Spp? spp;
 

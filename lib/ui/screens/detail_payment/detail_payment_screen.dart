@@ -45,7 +45,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
             )
           : ListView(
               physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
                 const SizedBox(height: 25),
                 Text(
@@ -57,8 +57,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                 ),
                 const SizedBox(height: 25),
                 Container(
-                  width: 327,
-                  height: 303,
+                  // height: 303,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   decoration: BoxDecoration(
@@ -79,6 +78,17 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                             fontSize: 16,
                             fontWeight: medium,
                           ),
+                        ),
+                      ),
+                      Center(
+                        child: Text(
+                          'Bulan ${payment?.spp.bulan}',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 15,
+                            letterSpacing: 1,
+                            fontWeight: semiBold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       const SizedBox(height: 34),
@@ -116,30 +126,21 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                             style: blackTextStyle.copyWith(
                               fontSize: 15,
                               fontWeight: medium,
-                              overflow: TextOverflow.ellipsis,
+                              // overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 42),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            'Bulan\n${payment?.spp.bulan}',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 14,
-                              letterSpacing: 1,
-                              fontWeight: regular,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
                           Text(
                             formatCurrency(
                                 int.parse(payment?.spp.jumlah ?? "")),
-                            style: greyTextStyle.copyWith(
-                              fontSize: 14,
-                              fontWeight: medium,
+                            style: blackTextStyle.copyWith(
+                              fontSize: 18,
+                              fontWeight: semiBold,
                             ),
                           ),
                         ],
@@ -147,7 +148,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.325),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.275),
                 CustomFilledButton(
                   title: 'Bayar',
                   onPressed: () {
@@ -156,6 +157,7 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                         MaterialPageRoute(
                           builder: (context) => MetodePembayaranScreen(
                             idPembayaran: payment?.idPembayaran.toString(),
+                            total: payment?.spp.jumlah,
                           ),
                         ));
                   },
