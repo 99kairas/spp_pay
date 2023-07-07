@@ -7,6 +7,7 @@ import 'package:spp_pay/ui/screens/dashboard_screen/dashboard_view_model.dart';
 import 'package:spp_pay/ui/screens/detail_payment/detail_payment_screen.dart';
 import 'package:spp_pay/ui/screens/riwayat_pembayaran/riwayat_pembayaran_screen.dart';
 import 'package:spp_pay/ui/screens/settings/setting_screen.dart';
+import 'package:spp_pay/ui/screens/settings/update_profile_screen.dart';
 import 'package:spp_pay/ui/widgets/bottom_navigation_bar_item.dart';
 import 'package:spp_pay/ui/widgets/dashboard_tagihan_item.dart';
 
@@ -48,14 +49,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             )
           : RefreshIndicator(
               onRefresh: () async {
-                dashboardProvider.isLoading
-                    ? Center(
-                        child: LoadingAnimationWidget.fourRotatingDots(
-                          color: greenColor,
-                          size: 50,
-                        ),
-                      )
-                    : dashboardProvider.getPembayaran(context);
+                dashboardProvider.getPembayaran(context);
+                dashboardProvider.getUserInfo(context);
               },
               child: ListView(
                 padding:
@@ -70,7 +65,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     } else if (index == 1) {
       return const RiwayatPembayaranScreen();
     } else if (index == 2) {
-      return const SettingScreen();
+      return SettingScreen(
+        noIndukSiswa: dashboardProvider.user?.noIndukSiswa,
+      );
     } else {
       return const Center(child: Text('Index belum terpasang'));
     }
@@ -149,17 +146,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdateProfileScreen(
+                        noIndukSiswa: dashboardProvider.user?.noIndukSiswa),
+                  ));
+            },
             child: Container(
               width: 60,
               height: 60,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    'assets/img_profile.png',
-                  ),
+                  image: dashboardProvider.image != ''
+                      ? NetworkImage(dashboardProvider.image ?? "")
+                          as ImageProvider
+                      : const AssetImage(
+                          'assets/img_profile.png',
+                        ),
                 ),
               ),
             ),
@@ -265,9 +272,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                             ));
                       },
-                      bulan: '${pembayaran?.spp.bulan}',
+                      bulan: '${pembayaran?.spp?.bulan}',
                       price: formatCurrency(
-                          int.parse(pembayaran?.spp.jumlah ?? "")),
+                          int.parse(pembayaran?.spp?.jumlah ?? "")),
                       isVerified: pembayaran?.status,
                     )
                   : Container();

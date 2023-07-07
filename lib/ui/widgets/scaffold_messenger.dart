@@ -4,7 +4,7 @@ scaffoldMessenger({
   required BuildContext context,
   required String title,
   required Color color,
-  required bool result,
+  bool? result,
 }) {
   if (result == true) {
     ScaffoldMessenger.of(context).showSnackBar(

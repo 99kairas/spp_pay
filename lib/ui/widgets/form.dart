@@ -10,6 +10,8 @@ class CustomFormField extends StatelessWidget {
   final String? hintText;
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
+  final bool? enabled;
+  final double? letterSpacing;
 
   const CustomFormField({
     super.key,
@@ -21,6 +23,8 @@ class CustomFormField extends StatelessWidget {
     this.hintText,
     this.onChanged,
     this.keyboardType,
+    this.enabled,
+    this.letterSpacing,
   });
 
   @override
@@ -41,6 +45,7 @@ class CustomFormField extends StatelessWidget {
           obscureText: obscureText,
           controller: controller,
           obscuringCharacter: '*',
+          enabled: enabled,
           keyboardType: keyboardType,
           decoration: InputDecoration(
             suffixIcon: suffixIcon,
@@ -48,6 +53,7 @@ class CustomFormField extends StatelessWidget {
             hintStyle: greyTextStyle.copyWith(
               fontSize: 14,
               fontWeight: regular,
+              letterSpacing: letterSpacing,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

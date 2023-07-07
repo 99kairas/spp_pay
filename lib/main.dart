@@ -11,6 +11,7 @@ import 'package:spp_pay/ui/screens/login_screen.dart/login_screen.dart';
 import 'package:spp_pay/ui/screens/login_screen.dart/login_view_model.dart';
 import 'package:spp_pay/ui/screens/metode_pembayaran/metode_pembayaran_view_model.dart';
 import 'package:spp_pay/ui/screens/riwayat_pembayaran/riwayat_pembayaran_view_model.dart';
+import 'package:spp_pay/ui/screens/settings/setting_view_model.dart';
 import 'package:spp_pay/ui/screens/splash_screen/splash_screen.dart';
 
 void main() {
@@ -37,6 +38,9 @@ void main() {
         ),
         ChangeNotifierProvider<AdminDashboardViewModel>(
           create: (_) => AdminDashboardViewModel(),
+        ),
+        ChangeNotifierProvider<SettingViewModel>(
+          create: (_) => SettingViewModel(),
         ),
       ],
       child: const MyApp(),

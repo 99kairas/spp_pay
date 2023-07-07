@@ -33,6 +33,11 @@ class DashboardViewModel with ChangeNotifier {
     try {
       if (result.data != '') {
         _user = result.data;
+        if (result.data.fotoProfil == '') {
+          _image = '';
+        } else {
+          _image = '${APIConstant.imageUrl}/img/${result.data.fotoProfil}';
+        }
       }
     } on DioException catch (e) {
       scaffoldMessengerFailed(
@@ -46,7 +51,7 @@ class DashboardViewModel with ChangeNotifier {
     final result = await DashboardService().getPembayaran();
 
     try {
-      if (result.data.isNotEmpty) {
+      if (result.data != null) {
         _pembayaran = result.data;
         final filter = _pembayaran!
             .where((element) => element.status == 0 || element.status == 2)

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:spp_pay/shared/shared_methods.dart';
 import 'package:spp_pay/shared/theme.dart';
+import 'package:spp_pay/ui/screens/settings/update_profile_screen.dart';
 import 'package:spp_pay/ui/widgets/setting_button_item.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+class SettingScreen extends StatefulWidget {
+  final String? noIndukSiswa;
+  const SettingScreen({
+    super.key,
+    this.noIndukSiswa,
+  });
 
+  @override
+  State<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +30,14 @@ class SettingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             settingButtonItem(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UpdateProfileScreen(
+                          noIndukSiswa: widget.noIndukSiswa),
+                    ));
+              },
               color: const Color(0xffF7931A),
               image: 'assets/ic_account.png',
               title: 'Ubah Profile',
