@@ -135,4 +135,21 @@ class AdminDashboardService {
       return false;
     }
   }
+
+  Future<bool> approvePembayaran({String? idPembayaran}) async {
+    final token = await SharedPref.getToken();
+
+    try {
+      final response = await dio.put(
+        '${APIConstant.baseUrl}/admin/pembayaran/approve/$idPembayaran',
+        options: Options(
+          headers: APIConstant.auth('$token'),
+        ),
+      );
+      response.data;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

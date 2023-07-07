@@ -279,7 +279,10 @@ class _DetailPembayaranUserState extends State<DetailPembayaranUser> {
                               AwesomeDialog(
                                 context: context,
                                 dismissOnTouchOutside: false,
-                                btnOkOnPress: () {},
+                                btnOkOnPress: () {
+                                  detailUser.approvePembayaran(
+                                      context, widget.idPembayaran);
+                                },
                                 btnCancelOnPress: () {},
                                 btnOkText: 'Setujui',
                                 btnCancelText: 'Tolak',

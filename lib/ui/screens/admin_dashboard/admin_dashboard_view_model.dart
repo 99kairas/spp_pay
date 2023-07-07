@@ -176,6 +176,35 @@ class AdminDashboardViewModel with ChangeNotifier {
         );
       }
       notifyListeners();
-    } catch (e) {}
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  void approvePembayaran(BuildContext context, String? idPembayaran) async {
+    try {
+      final result = await AdminDashboardService()
+          .approvePembayaran(idPembayaran: idPembayaran);
+
+      if (result == true) {
+        scaffoldMessenger(
+          context: context,
+          title: 'berhasil menyetujui pembayaran',
+          color: greenColor,
+          result: result,
+        );
+        Navigator.pop(context);
+      } else {
+        scaffoldMessenger(
+          context: context,
+          title: 'gagal menambahkan pembayaran ke semua siswa',
+          color: redColor,
+          result: result,
+        );
+      }
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }
