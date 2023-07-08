@@ -197,7 +197,34 @@ class AdminDashboardViewModel with ChangeNotifier {
       } else {
         scaffoldMessenger(
           context: context,
-          title: 'gagal menambahkan pembayaran ke semua siswa',
+          title: 'gagal menyetujui pembayaran',
+          color: redColor,
+          result: result,
+        );
+      }
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  void declinePembayaran(BuildContext context, String? idPembayaran) async {
+    try {
+      final result = await AdminDashboardService()
+          .declinePembayaran(idPembayaran: idPembayaran);
+
+      if (result == true) {
+        scaffoldMessenger(
+          context: context,
+          title: 'pembayaran ditolak',
+          color: greenColor,
+          result: result,
+        );
+        Navigator.pop(context);
+      } else {
+        scaffoldMessenger(
+          context: context,
+          title: 'gagal menolak pembayaran',
           color: redColor,
           result: result,
         );

@@ -59,9 +59,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 height: 130,
                 margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
-                  border: updateProvider.image != null
-                      ? null
-                      : Border.all(width: 2, color: blackColor),
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: updateProvider.image != ''

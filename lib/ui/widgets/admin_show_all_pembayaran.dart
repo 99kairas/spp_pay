@@ -33,94 +33,100 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
               size: 50,
             ),
           )
-        : Container(
-            margin: const EdgeInsets.only(top: 20),
-            child: ListView.builder(
-              padding: const EdgeInsets.only(top: 15),
-              itemCount: adminDashboardProvider.allPembayaran?.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                var pembayaran = adminDashboardProvider.allPembayaran?[index];
-                return pembayaran?.status == 2
-                    ? Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 24),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailPembayaranUser(
-                                    idPembayaran: pembayaran?.idPembayaran,
-                                  ),
-                                ));
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 18),
-                            padding: const EdgeInsets.all(22),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: whiteColor,
-                              border: Border.all(
-                                width: 1,
-                                color: greyColor,
+        : RefreshIndicator(
+            onRefresh: () async {
+              adminDashboardProvider.getAllPembayaran();
+            },
+            child: Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: ListView.builder(
+                padding: const EdgeInsets.only(top: 15),
+                itemCount: adminDashboardProvider.allPembayaran?.length,
+                physics: const AlwaysScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  var pembayaran = adminDashboardProvider.allPembayaran?[index];
+                  return pembayaran?.status == 2
+                      ? Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 24),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailPembayaranUser(
+                                      idPembayaran: pembayaran?.idPembayaran,
+                                    ),
+                                  ));
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 18),
+                              padding: const EdgeInsets.all(22),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: whiteColor,
+                                border: Border.all(
+                                  width: 1,
+                                  color: greyColor,
+                                ),
                               ),
-                            ),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  flex: 10,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 10,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          pembayaran?.siswa?.namaSiswa ?? "",
+                                          style: blackTextStyle.copyWith(
+                                            fontSize: 15,
+                                            fontWeight: medium,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          formatCurrency(int.parse(
+                                              pembayaran?.spp?.jumlah ?? "")),
+                                          style: greyTextStyle.copyWith(
+                                            fontSize: 12,
+                                            fontWeight: regular,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Row(
                                     children: [
-                                      Text(
-                                        pembayaran?.siswa?.namaSiswa ?? "",
-                                        style: blackTextStyle.copyWith(
-                                          fontSize: 15,
-                                          fontWeight: medium,
-                                          overflow: TextOverflow.ellipsis,
+                                      SizedBox(
+                                        width: 14,
+                                        child: Image.asset(
+                                          'assets/ic_uncheck.png',
+                                          color: redColor,
                                         ),
                                       ),
-                                      const SizedBox(height: 2),
+                                      const SizedBox(width: 4),
                                       Text(
-                                        formatCurrency(int.parse(
-                                            pembayaran?.spp?.jumlah ?? "")),
-                                        style: greyTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: regular,
+                                        'Belum Lunas',
+                                        style: redTextStyle.copyWith(
+                                          fontWeight: medium,
+                                          fontSize: 11,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                const Spacer(),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 14,
-                                      child: Image.asset(
-                                        'assets/ic_uncheck.png',
-                                        color: redColor,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      'Belum Lunas',
-                                      style: redTextStyle.copyWith(
-                                        fontWeight: medium,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    : Container();
-              },
+                        )
+                      : Container();
+                },
+              ),
             ),
           );
   }
@@ -283,7 +289,10 @@ class _DetailPembayaranUserState extends State<DetailPembayaranUser> {
                                   detailUser.approvePembayaran(
                                       context, widget.idPembayaran);
                                 },
-                                btnCancelOnPress: () {},
+                                btnCancelOnPress: () {
+                                  detailUser.declinePembayaran(
+                                      context, widget.idPembayaran);
+                                },
                                 btnOkText: 'Setujui',
                                 btnCancelText: 'Tolak',
                                 body: Image.network(detailUser.image ?? ""),

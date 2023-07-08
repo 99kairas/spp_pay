@@ -36,27 +36,24 @@ class _RiwayatPembayaranScreenState extends State<RiwayatPembayaranScreen> {
                 size: 50,
               ),
             )
-          : riwayatProvider.pembayaran != ''
-              ? ListView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                  itemCount: riwayatProvider.pembayaran?.length,
-                  itemBuilder: (context, index) {
-                    var riwayatSuccess = riwayatProvider.pembayaran?[index];
-                    return riwayatSuccess?.status == 1
-                        ? RiwayatPembayaranItem(
-                            bulan: '${riwayatSuccess?.spp?.bulan}',
-                            price: formatCurrency(
-                              int.parse('${riwayatSuccess?.spp?.jumlah}'),
-                            ),
-                            tagihan: riwayatSuccess?.idPembayaran,
-                            onTap: () {},
-                            isVerified: riwayatSuccess?.status,
-                          )
-                        : Container();
-                  },
-                )
-              : Container(child: Text('Tidak ada data'),),
+          : ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              itemCount: riwayatProvider.pembayaran?.length,
+              itemBuilder: (context, index) {
+                var riwayatSuccess = riwayatProvider.pembayaran?[index];
+                return riwayatSuccess?.status == 1
+                    ? RiwayatPembayaranItem(
+                        bulan: '${riwayatSuccess?.spp?.bulan}',
+                        price: formatCurrency(
+                          int.parse('${riwayatSuccess?.spp?.jumlah}'),
+                        ),
+                        tagihan: riwayatSuccess?.idPembayaran,
+                        onTap: () {},
+                        isVerified: riwayatSuccess?.status,
+                      )
+                    : Container();
+              },
+            ),
     );
   }
 }
