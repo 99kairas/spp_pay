@@ -38,25 +38,33 @@ class _SettingScreenState extends State<SettingScreen> {
                           noIndukSiswa: widget.noIndukSiswa),
                     ));
               },
-              color: const Color(0xffF7931A),
+              color: yellowColor,
               image: 'assets/ic_account.png',
               title: 'Ubah Profile',
             ),
             settingButtonItem(
+              onTap: () {
+                Navigator.pushNamed(context, '/change-password');
+              },
+              color: purpleColor,
+              image: 'assets/ic_password.png',
+              title: 'Ganti Password',
+            ),
+            settingButtonItem(
               onTap: () {},
-              color: const Color(0xff27AE60),
+              color: greenColor,
               image: 'assets/ic_information.png',
               title: 'Tentang SD Islam Teladan Suci',
             ),
             settingButtonItem(
               onTap: () {},
-              color: const Color(0xffC2A633),
+              color: blackColor,
               image: 'assets/ic_galeri.png',
               title: 'Galeri',
             ),
             settingButtonItem(
               onTap: () {},
-              color: const Color(0xff2D8EFF),
+              color: blueColor,
               image: 'assets/ic_guru.png',
               title: 'Data Guru dan Staff',
             ),

@@ -88,4 +88,28 @@ class SettingService {
       return false;
     }
   }
+
+  Future<bool> changePassword({
+    String? password,
+    String? newPassword,
+  }) async {
+    final token = await SharedPref.getToken();
+
+    try {
+      final response = await dio.put(
+        '${APIConstant.baseUrl}/user/password/change',
+        data: {
+          'password': password,
+          'newPassword': newPassword,
+        },
+        options: Options(
+          headers: APIConstant.auth('$token'),
+        ),
+      );
+      response.data;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

@@ -103,4 +103,51 @@ class SettingViewModel with ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  // PROPERTY OF CHANGE PASSWORD
+  TextEditingController oldPasswordController = TextEditingController(text: '');
+  TextEditingController newPasswordController = TextEditingController(text: '');
+
+  bool _isHidePassword = true;
+  bool get isHidePassword => _isHidePassword;
+
+  bool _isHideNewPassword = true;
+  bool get isHideNewPassword => _isHideNewPassword;
+
+  void showHidePassword() {
+    _isHidePassword = !_isHidePassword;
+    notifyListeners();
+  }
+
+  void showHideNewPassword() {
+    _isHideNewPassword = !_isHideNewPassword;
+    notifyListeners();
+  }
+
+  void changePassword(BuildContext context) async {
+    final result = await SettingService().changePassword(
+      password: oldPasswordController.text,
+      newPassword: newPasswordController.text,
+    );
+    if (result == true) {
+      scaffoldMessenger(
+        context: context,
+        title: 'berhasil mengganti password',
+        color: greenColor,
+        result: result,
+      );
+      oldPasswordController.clear();
+      newPasswordController.clear();
+      Navigator.pop(context);
+    } else {
+      scaffoldMessenger(
+        context: context,
+        title: 'gagal mengganti password',
+        color: redColor,
+        result: result,
+      );
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
 }

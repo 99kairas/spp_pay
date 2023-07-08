@@ -42,8 +42,6 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
               child: ListView.builder(
                 padding: const EdgeInsets.only(top: 15),
                 itemCount: adminDashboardProvider.allPembayaran?.length,
-                physics: const AlwaysScrollableScrollPhysics(),
-                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   var pembayaran = adminDashboardProvider.allPembayaran?[index];
                   return pembayaran?.status == 2
