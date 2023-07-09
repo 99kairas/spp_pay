@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:spp_pay/models/all_guru_response.dart';
 import 'package:spp_pay/models/user_information_respnse.dart';
 import 'package:spp_pay/services/setting_service.dart';
 import 'package:spp_pay/shared/shared_methods.dart';
@@ -147,6 +148,19 @@ class SettingViewModel with ChangeNotifier {
         result: result,
       );
     }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  List<AllGuru>? _guru;
+  List<AllGuru>? get guru => _guru;
+
+  void getAllGuru() async {
+    _isLoading = true;
+    await Future.delayed(const Duration(seconds: 1));
+    final result = await SettingService().getAllGuru();
+
+    _guru = result.data;
     _isLoading = false;
     notifyListeners();
   }

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
+import 'package:spp_pay/models/all_guru_response.dart';
 import 'package:spp_pay/models/user_information_respnse.dart';
 import 'package:spp_pay/shared/shared_methods.dart';
 
@@ -110,6 +111,16 @@ class SettingService {
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<AllGuruResponse> getAllGuru() async {
+    try {
+      final response = await dio.get('${APIConstant.baseUrl}/guru');
+
+      return AllGuruResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw Exception(e.response?.data);
     }
   }
 }

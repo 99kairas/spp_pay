@@ -51,19 +51,9 @@ class _SettingScreenState extends State<SettingScreen> {
               title: 'Ganti Password',
             ),
             settingButtonItem(
-              onTap: () {},
-              color: greenColor,
-              image: 'assets/ic_information.png',
-              title: 'Tentang SD Islam Teladan Suci',
-            ),
-            settingButtonItem(
-              onTap: () {},
-              color: blackColor,
-              image: 'assets/ic_galeri.png',
-              title: 'Galeri',
-            ),
-            settingButtonItem(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/guru');
+              },
               color: blueColor,
               image: 'assets/ic_guru.png',
               title: 'Data Guru dan Staff',
