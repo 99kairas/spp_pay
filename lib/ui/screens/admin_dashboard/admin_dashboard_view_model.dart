@@ -234,4 +234,41 @@ class AdminDashboardViewModel with ChangeNotifier {
       throw Exception(e);
     }
   }
+
+  // PROPERTY OF TAMBAH SISWA
+  TextEditingController nisController = TextEditingController(text: '');
+  TextEditingController namaController = TextEditingController(text: '');
+  TextEditingController kelasController = TextEditingController(text: '');
+
+  void addSiswa(BuildContext context) async {
+    try {
+      final result = await AdminDashboardService().addSiswa(
+        noIndukSiswa: nisController.text,
+        namaSiswa: namaController.text,
+        kelas: kelasController.text,
+      );
+      if (result == true) {
+        scaffoldMessenger(
+          context: context,
+          title:
+              'berhasil membuat user',
+          color: greenColor,
+          result: result,
+        );
+        nisController.clear();
+        namaController.clear();
+        kelasController.clear();
+      } else {
+        scaffoldMessenger(
+          context: context,
+          title: 'gagal membuat user',
+          color: redColor,
+          result: result,
+        );
+      }
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

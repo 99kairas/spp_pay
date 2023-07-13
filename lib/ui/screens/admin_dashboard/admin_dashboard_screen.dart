@@ -7,6 +7,7 @@ import 'package:spp_pay/ui/widgets/admin_dashboard_drawer_item.dart';
 import 'package:spp_pay/ui/widgets/admin_show_all_pembayaran.dart';
 import 'package:spp_pay/ui/widgets/admin_show_all_spp.dart';
 import 'package:spp_pay/ui/widgets/admin_tambah_pembayaran.dart';
+import 'package:spp_pay/ui/widgets/admin_tambah_siswa.dart';
 import 'package:spp_pay/ui/widgets/admin_tambah_spp.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
@@ -37,6 +38,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     const AdminShowAllPembayaran(),
     const AdminTambahSpp(),
     const AdminShowAllSpp(),
+    const AdminTambahSiswa(),
   ];
 
   @override
@@ -95,6 +97,14 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                   Navigator.pop(context);
                 },
                 isSelect: _selectedIndex == 3,
+              ),
+              AdminDashboardDrawerItem(
+                title: 'Tambah Siswa',
+                onTap: () {
+                  _onItemTapped(4);
+                  Navigator.pop(context);
+                },
+                isSelect: _selectedIndex == 4,
               ),
             ],
           ),

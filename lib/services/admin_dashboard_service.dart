@@ -169,4 +169,29 @@ class AdminDashboardService {
       return false;
     }
   }
+
+  Future<bool> addSiswa({
+    String? noIndukSiswa,
+    String? namaSiswa,
+    String? kelas,
+  }) async {
+    try {
+      final response = await dio.post(
+        '${APIConstant.baseUrl}/auth/register',
+        data: {
+          'no_induk_siswa': noIndukSiswa,
+          'nama_siswa': namaSiswa,
+          'password': 'Teladan@123',
+          'kelas': kelas,
+          'alamat': '',
+          'foto_profil': '',
+        },
+      );
+      print('service ${response.data}');
+      return true;
+    } on DioException catch (e) {
+      print('error service ${e.response?.data}');
+      return false;
+    }
+  }
 }
