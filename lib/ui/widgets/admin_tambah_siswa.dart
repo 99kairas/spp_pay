@@ -23,16 +23,19 @@ class _AdminTambahSiswaState extends State<AdminTambahSiswa> {
         SizedBox(height: 20),
         CustomFormField(
           title: 'No Induk Siswa',
+          hintText: 'Masukkan Nomor Induk Siswa',
           controller: tambahSiswaProvider.nisController,
         ),
         SizedBox(height: 20),
         CustomFormField(
           title: 'Nama Siswa',
+          hintText: 'Masukkan Nama Siswa',
           controller: tambahSiswaProvider.namaController,
         ),
         SizedBox(height: 20),
         CustomFormField(
           title: 'Kelas',
+          hintText: 'Masukkan Kelas Siswa',
           controller: tambahSiswaProvider.kelasController,
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.4),

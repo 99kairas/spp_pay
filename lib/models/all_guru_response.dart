@@ -72,14 +72,14 @@ class AllGuru {
     };
 }
 
-enum JenisKelamin { PEREMPUAN, LAKI_LAKI }
+enum JenisKelamin { LAKI_LAKI, PEREMPUAN }
 
 final jenisKelaminValues = EnumValues({
     "Laki - Laki": JenisKelamin.LAKI_LAKI,
     "Perempuan": JenisKelamin.PEREMPUAN
 });
 
-enum MataPelajaran { GURU_KELAS, GURU_AGAMA_ISLAM, GURU_OLAHRAGA }
+enum MataPelajaran { GURU_AGAMA_ISLAM, GURU_KELAS, GURU_OLAHRAGA }
 
 final mataPelajaranValues = EnumValues({
     "Guru Agama Islam": MataPelajaran.GURU_AGAMA_ISLAM,

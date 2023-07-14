@@ -41,11 +41,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     const AdminTambahSiswa(),
   ];
 
+  static final List _widgetTitle = [
+    const Text('Tambah Pembayaran'),
+    const Text('Lihat Semua Pembayaran'),
+    const Text('Tambah SPP'),
+    const Text('Lihat Semua SPP'),
+    const Text('Tambah Siswa'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Dashboard'),
+        title: _widgetTitle[_selectedIndex],
         actions: [
           IconButton(
             onPressed: () {
