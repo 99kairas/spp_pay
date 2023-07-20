@@ -44,7 +44,6 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
               ),
             )
           : ListView(
-              physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
                 const SizedBox(height: 25),

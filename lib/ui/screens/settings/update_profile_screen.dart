@@ -108,6 +108,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 updateProvider.updateProfile(context);
               },
             ),
+            const SizedBox(height: 50),
           ],
         ),
       ),

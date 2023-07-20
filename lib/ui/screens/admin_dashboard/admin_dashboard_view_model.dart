@@ -167,10 +167,12 @@ class AdminDashboardViewModel with ChangeNotifier {
           color: greenColor,
           result: result,
         );
+        pembayaranSiswaController.clear();
       } else {
         scaffoldMessenger(
           context: context,
-          title: 'gagal menambahkan pembayaran ke semua siswa',
+          title:
+              'gagal menambahkan pembayaran ke ${pembayaranSiswaController.text}',
           color: redColor,
           result: result,
         );
@@ -250,8 +252,7 @@ class AdminDashboardViewModel with ChangeNotifier {
       if (result == true) {
         scaffoldMessenger(
           context: context,
-          title:
-              'berhasil membuat user',
+          title: 'berhasil membuat user',
           color: greenColor,
           result: result,
         );

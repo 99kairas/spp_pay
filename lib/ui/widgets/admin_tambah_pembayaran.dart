@@ -292,6 +292,7 @@ class _AdminTambahPembayaranDetailsState
             ).show();
           },
         ),
+        const SizedBox(height: 30),
       ],
     );
   }
@@ -317,6 +318,7 @@ class _AdminTambahPembayaranDetailsState
               );
             },
           ),
+          const SizedBox(height: 30),
         ],
       ),
     );

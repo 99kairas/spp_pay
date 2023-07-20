@@ -45,6 +45,7 @@ class _AdminTambahSiswaState extends State<AdminTambahSiswa> {
             tambahSiswaProvider.addSiswa(context);
           },
         ),
+        const SizedBox(height: 30),
       ],
     );
   }
