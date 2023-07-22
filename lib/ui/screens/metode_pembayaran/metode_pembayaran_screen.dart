@@ -187,11 +187,9 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
                   '1. Sebelum melakukan pembayaran menggunakan Transfer, pastikan jumlah yang dimasukkan sesuai'),
           const SizedBox(height: 10),
           const MetodePembayaranText(
-              title: '2. Transfer ke salah satu nomor rekening di bawah ini :'),
+              title: '2. Transfer ke nomor rekening di bawah ini :'),
           const MetodePembayaranText(
-              title: ' - BCA\n5410425652 a.n SDI Teladan Suci'),
-          const MetodePembayaranText(
-              title: ' - BRI\n6455-01-002538-53-3 a.n Yayasan Teladan Suci'),
+              title: ' - BRI\n73.2001002760.5.38 A/n SD Islam Teladan Suci'),
           const SizedBox(height: 10),
           const MetodePembayaranText(
               title:
