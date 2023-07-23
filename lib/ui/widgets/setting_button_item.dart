@@ -12,9 +12,8 @@ Widget settingButtonItem({
       InkWell(
         onTap: onTap,
         child: SizedBox(
-          width: 335,
-          height: 63,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 width: 45,
