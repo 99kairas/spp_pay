@@ -93,7 +93,6 @@ class AdminDashboardService {
         '${APIConstant.baseUrl}/admin/pembayaran/create/all?id_spp=$idSpp',
         data: {
           'foto_pembayaran': "",
-          'jumlah_bayar': 0,
           'tanggal_bayar': '${DateTime.now()}',
           'status': 0,
         },
@@ -136,7 +135,7 @@ class AdminDashboardService {
     }
   }
 
-  Future<bool> approvePembayaran({String? idPembayaran}) async {
+  Future<bool> approvePembayaran({String? idPembayaran, String? idSpp}) async {
     final token = await SharedPref.getToken();
 
     try {

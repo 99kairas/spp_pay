@@ -69,6 +69,7 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
                                   MaterialPageRoute(
                                     builder: (context) => DetailPembayaranUser(
                                       idPembayaran: pembayaran?.idPembayaran,
+                                      idSpp: pembayaran?.idSpp,
                                     ),
                                   ));
                             }
@@ -107,6 +108,15 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
                                     style: greyTextStyle.copyWith(
                                       fontSize: 12,
                                       fontWeight: regular,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    pembayaran?.spp?.bulan ?? "",
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 15,
+                                      fontWeight: medium,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ],
@@ -178,10 +188,12 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
 
 class DetailPembayaranUser extends StatefulWidget {
   final String? idPembayaran;
+  final String? idSpp;
 
   const DetailPembayaranUser({
     super.key,
     this.idPembayaran,
+    this.idSpp,
   });
 
   @override
@@ -228,7 +240,6 @@ class _DetailPembayaranUserState extends State<DetailPembayaranUser> {
                     ),
                     const SizedBox(height: 25),
                     Container(
-                      width: 327,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 12),
                       decoration: BoxDecoration(
@@ -331,7 +342,10 @@ class _DetailPembayaranUserState extends State<DetailPembayaranUser> {
                                 dismissOnTouchOutside: false,
                                 btnOkOnPress: () {
                                   detailUser.approvePembayaran(
-                                      context, widget.idPembayaran);
+                                    context: context,
+                                    idPembayaran: widget.idPembayaran,
+                                    idSpp: widget.idSpp,
+                                  );
                                 },
                                 btnCancelOnPress: () {
                                   detailUser.declinePembayaran(

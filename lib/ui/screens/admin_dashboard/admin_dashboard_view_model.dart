@@ -183,14 +183,15 @@ class AdminDashboardViewModel with ChangeNotifier {
     }
   }
 
-  void approvePembayaran(BuildContext context, String? idPembayaran) async {
+  void approvePembayaran(
+      {BuildContext? context, String? idPembayaran, String? idSpp}) async {
     try {
       final result = await AdminDashboardService()
-          .approvePembayaran(idPembayaran: idPembayaran);
+          .approvePembayaran(idPembayaran: idPembayaran, idSpp: idSpp);
 
       if (result == true) {
         scaffoldMessenger(
-          context: context,
+          context: context!,
           title: 'berhasil menyetujui pembayaran',
           color: greenColor,
           result: result,
@@ -198,7 +199,7 @@ class AdminDashboardViewModel with ChangeNotifier {
         Navigator.pop(context);
       } else {
         scaffoldMessenger(
-          context: context,
+          context: context!,
           title: 'gagal menyetujui pembayaran',
           color: redColor,
           result: result,

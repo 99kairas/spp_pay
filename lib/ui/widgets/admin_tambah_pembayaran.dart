@@ -16,6 +16,37 @@ class AdminTambahPembayaran extends StatefulWidget {
 }
 
 class _AdminTambahPembayaranState extends State<AdminTambahPembayaran> {
+  int monthToValue(String month) {
+    switch (month.toLowerCase()) {
+      case 'july':
+        return 0;
+      case 'agustus':
+        return 1;
+      case 'september':
+        return 2;
+      case 'oktober':
+        return 3;
+      case 'november':
+        return 4;
+      case 'desember':
+        return 5;
+      case 'januari':
+        return 6;
+      case 'februari':
+        return 7;
+      case 'maret':
+        return 8;
+      case 'april':
+        return 9;
+      case 'mei':
+        return 10;
+      case 'juni':
+        return 11;
+      default:
+        return 0;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +57,21 @@ class _AdminTambahPembayaranState extends State<AdminTambahPembayaran> {
   Widget build(BuildContext context) {
     final adminDashboardProvider =
         Provider.of<AdminDashboardViewModel>(context);
+
+    adminDashboardProvider.allSpp?.sort((a, b) {
+      int monthA = monthToValue(a.bulan ?? "");
+      int yearA = int.tryParse(a.tahun ?? "") ?? 0;
+
+      int monthB = monthToValue(b.bulan ?? "");
+      int yearB = int.tryParse(b.tahun ?? "") ?? 0;
+
+      if (yearA != yearB) {
+        return yearB - yearA;
+      } else {
+        return monthA - monthB;
+      }
+    });
+
     return adminDashboardProvider.isLoading
         ? Center(
             child: LoadingAnimationWidget.fourRotatingDots(
