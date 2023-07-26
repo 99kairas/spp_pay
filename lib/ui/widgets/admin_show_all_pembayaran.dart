@@ -94,6 +94,15 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
+                                    pembayaran?.noIndukSiswa ?? "",
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 15,
+                                      fontWeight: medium,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
                                     pembayaran?.siswa?.namaSiswa ?? "",
                                     style: blackTextStyle.copyWith(
                                       fontSize: 15,
