@@ -119,14 +119,12 @@ class _DetailPaymentScreenState extends State<DetailPaymentScreen> {
                       ),
                       const SizedBox(height: 28),
                       Center(
-                        child: Flexible(
-                          child: Text(
-                            'No Tagihan : ${payment?.idPembayaran}',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 15,
-                              fontWeight: medium,
-                              // overflow: TextOverflow.ellipsis,
-                            ),
+                        child: Text(
+                          'No Tagihan : ${payment?.idPembayaran}',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 15,
+                            fontWeight: medium,
+                            // overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),

@@ -87,49 +87,45 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
                         ),
                         child: Row(
                           children: [
-                            Flexible(
-                              fit: FlexFit.tight,
-                              flex: 10,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    pembayaran?.noIndukSiswa ?? "",
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 15,
-                                      fontWeight: medium,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  pembayaran?.noIndukSiswa ?? "",
+                                  style: blackTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    pembayaran?.siswa?.namaSiswa ?? "",
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 15,
-                                      fontWeight: medium,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  pembayaran?.siswa?.namaSiswa ?? "",
+                                  style: blackTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    formatCurrency(int.parse(
-                                        pembayaran?.spp?.jumlah ?? "")),
-                                    style: greyTextStyle.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: regular,
-                                    ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  formatCurrency(int.parse(
+                                      pembayaran?.spp?.jumlah ?? "")),
+                                  style: greyTextStyle.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: regular,
                                   ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    pembayaran?.spp?.bulan ?? "",
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 15,
-                                      fontWeight: medium,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  pembayaran?.spp?.bulan ?? "",
+                                  style: blackTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                             const Spacer(),
                             Row(
@@ -300,15 +296,12 @@ class _DetailPembayaranUserState extends State<DetailPembayaranUser> {
                           ),
                           const SizedBox(height: 28),
                           Center(
-                            child: Flexible(
-                              flex: 1,
-                              child: Text(
-                                'No Tagihan : ${user?.idPembayaran}',
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: medium,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                            child: Text(
+                              'No Tagihan : ${user?.idPembayaran}',
+                              style: blackTextStyle.copyWith(
+                                fontSize: 15,
+                                fontWeight: medium,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
