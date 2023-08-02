@@ -348,7 +348,8 @@ class _DetailPembayaranUserState extends State<DetailPembayaranUser> {
                             onPressed: () {
                               AwesomeDialog(
                                 context: context,
-                                dismissOnTouchOutside: false,
+                                dismissOnTouchOutside: true,
+                                dialogType: DialogType.NO_HEADER,
                                 btnOkOnPress: () {
                                   detailUser.approvePembayaran(
                                     context: context,

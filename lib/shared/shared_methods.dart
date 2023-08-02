@@ -84,8 +84,10 @@ class SharedPref {
 }
 
 class APIConstant {
-  static String baseUrl = 'http://10.0.2.2:5000/api';
-  static String imageUrl = 'http://10.0.2.2:5000';
+  // static String baseUrl = 'http://10.0.2.2:5000/api';
+  static String baseUrl = 'https://spp-payment.up.railway.app/api';
+  // static String imageUrl = 'http://10.0.2.2:5000';
+  static String imageUrl = 'https://spp-payment.up.railway.app';
   static Map<String, String> auth(String token) => {
         "authorization": "$token",
       };
