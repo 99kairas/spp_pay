@@ -99,18 +99,21 @@ class _AdminShowAllPembayaranState extends State<AdminShowAllPembayaran> {
                                   ),
                                 ),
                                 const SizedBox(height: 2),
-                                Text(
-                                  pembayaran?.siswa?.namaSiswa ?? "",
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 15,
-                                    fontWeight: medium,
-                                    overflow: TextOverflow.ellipsis,
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.5,
+                                  child: Text(
+                                    pembayaran?.siswa?.namaSiswa ?? "",
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 15,
+                                      fontWeight: medium,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  formatCurrency(int.parse(
-                                      pembayaran?.spp?.jumlah ?? "")),
+                                  formatCurrency(
+                                      int.parse(pembayaran?.spp?.jumlah ?? "")),
                                   style: greyTextStyle.copyWith(
                                     fontSize: 12,
                                     fontWeight: regular,
