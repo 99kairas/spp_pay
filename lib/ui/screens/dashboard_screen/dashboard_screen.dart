@@ -19,6 +19,37 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  int monthToValue(String month) {
+    switch (month.toLowerCase()) {
+      case 'juli':
+        return 0;
+      case 'agustus':
+        return 1;
+      case 'september':
+        return 2;
+      case 'oktober':
+        return 3;
+      case 'november':
+        return 4;
+      case 'desember':
+        return 5;
+      case 'januari':
+        return 6;
+      case 'februari':
+        return 7;
+      case 'maret':
+        return 8;
+      case 'april':
+        return 9;
+      case 'mei':
+        return 10;
+      case 'juni':
+        return 11;
+      default:
+        return 0;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -239,6 +270,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget buildTagihan(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardViewModel>(context);
+
+    dashboardProvider.pembayaran?.sort((a, b) {
+      int monthA = monthToValue(a.spp?.bulan ?? "");
+      int yearA = int.tryParse(a.spp?.tahun ?? "") ?? 0;
+
+      int monthB = monthToValue(b.spp?.bulan ?? "");
+      int yearB = int.tryParse(b.spp?.tahun ?? "") ?? 0;
+
+      if (yearA != yearB) {
+        return yearB - yearA;
+      } else {
+        return monthA - monthB;
+      }
+    });
 
     return Container(
       margin: const EdgeInsets.only(top: 30),

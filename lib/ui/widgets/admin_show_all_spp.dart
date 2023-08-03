@@ -15,7 +15,7 @@ class AdminShowAllSpp extends StatefulWidget {
 class _AdminShowAllSppState extends State<AdminShowAllSpp> {
   int monthToValue(String month) {
     switch (month.toLowerCase()) {
-      case 'july':
+      case 'juli':
         return 0;
       case 'agustus':
         return 1;

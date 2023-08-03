@@ -18,7 +18,7 @@ class AdminTambahPembayaran extends StatefulWidget {
 class _AdminTambahPembayaranState extends State<AdminTambahPembayaran> {
   int monthToValue(String month) {
     switch (month.toLowerCase()) {
-      case 'july':
+      case 'juli':
         return 0;
       case 'agustus':
         return 1;
