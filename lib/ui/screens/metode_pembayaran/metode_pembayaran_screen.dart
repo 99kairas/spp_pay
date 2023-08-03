@@ -189,7 +189,7 @@ class _MetodePembayaranScreenState extends State<MetodePembayaranScreen> {
           const MetodePembayaranText(
               title: '2. Transfer ke nomor rekening di bawah ini :'),
           const MetodePembayaranText(
-              title: ' - BRI\n73.2001002760.5.38 A/n SD Islam Teladan Suci'),
+              title: ' - BRI\n73.2001002740.2.21 A/n SD Islam Teladan Suci'),
           const SizedBox(height: 10),
           const MetodePembayaranText(
               title:
