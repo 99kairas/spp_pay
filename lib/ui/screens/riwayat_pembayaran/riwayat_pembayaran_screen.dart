@@ -43,6 +43,7 @@ class _RiwayatPembayaranScreenState extends State<RiwayatPembayaranScreen> {
                 var riwayatSuccess = riwayatProvider.pembayaran?[index];
                 return riwayatSuccess?.status == 1
                     ? RiwayatPembayaranItem(
+                        tahun: '${riwayatSuccess?.spp?.tahun}',
                         bulan: '${riwayatSuccess?.spp?.bulan}',
                         price: formatCurrency(
                           int.parse('${riwayatSuccess?.spp?.jumlah}'),

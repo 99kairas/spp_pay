@@ -4,6 +4,7 @@ import 'package:spp_pay/shared/theme.dart';
 class RiwayatPembayaranItem extends StatelessWidget {
   final String bulan;
   final String price;
+  final String tahun;
   final String? tagihan;
   final int? isVerified;
   final Function()? onTap;
@@ -15,6 +16,7 @@ class RiwayatPembayaranItem extends StatelessWidget {
     this.isVerified = 0,
     this.onTap,
     this.tagihan,
+    required this.tahun,
   });
 
   @override
@@ -38,10 +40,20 @@ class RiwayatPembayaranItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  tahun,
+                  style: blackTextStyle.copyWith(
+                    fontSize: 13,
+                    fontWeight: medium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
                   bulan,
                   style: blackTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: medium,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -50,6 +62,7 @@ class RiwayatPembayaranItem extends StatelessWidget {
                   style: greyTextStyle.copyWith(
                     fontSize: 12,
                     fontWeight: regular,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
